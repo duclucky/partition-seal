@@ -30,8 +30,10 @@ schema and Result: SUCCESS are independently recorded in DEPLOYMENT.md.
 No public behavior change was applied during this review. Primary partition/both
 consumptions and timed recovery/close are finalized with canonical reads. Review
 has three AGREE validators and one ERROR validator, final MAJORITY_AGREE/SUCCESS;
-the error's cause is unknown and is preserved. Remaining acceptance items are
-final public repo/CI, unchanged full grading check and final master/checklist audit.
+the error's cause is unknown and is preserved. Public repo and CI are verified:
+https://github.com/duclucky/partition-seal/actions/runs/38449244452.
+The unchanged full grading result and final master/checklist audit are maintained
+outside the public repository in the owner's private workspace.
 
 Limits: two-unit, one-level partition; fixed recipients; max3 attempts; internal
 permissions only. No actual external gateway, crypto title, law or GEN custody.

@@ -5,8 +5,9 @@ when an original holder subdivides their semantic scopes between two recipients.
 Independent GenLayer validators judge complete coverage and non-widening; code
 reassigns each existing unit exactly once and retires original authority.
 
-Status: contract and Studionet primary/recovery lifecycle verified. Public CI is
-pending. [Specification](docs/README.md) defines the authority model, safety
+Status: contract and Studionet primary/recovery lifecycle verified; public
+[CI passes](https://github.com/duclucky/partition-seal/actions/runs/38449244452).
+[Specification](docs/README.md) defines the authority model, safety
 rows, meaning validator, temporal guards and executable acceptance cases.
 
 Owner-selected network for this run: **Studionet**, chain61999. It is separate
@@ -60,3 +61,5 @@ views and holder-signed one-time exercise. No adopter or real external gateway i
 claimed. Two units/two children, one level, at most three attempts. Authoritative
 transactions create internal permissions; they do not prove external property,
 copyright, service delivery or law. No frontend or native asset custody.
+
+[Copy-ready submission fields](docs/SUBMISSION.md). The owner submits on the Portal.

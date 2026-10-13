@@ -2,9 +2,10 @@
 
 ## Identity and product hook
 
-IDEA-042, partition-seal, Intelligent Contracts, DESIGN. Owner requested **Studionet
+IDEA-042, partition-seal, Intelligent Contracts, VERIFIED. Owner requested **Studionet
 61999** for this deliverable. New independent contract-only repo.
-Product deployment and primary/recovery lifecycle verified; public CI pending.
+Product deployment and primary/recovery lifecycle verified; public CI passed at
+https://github.com/duclucky/partition-seal/actions/runs/38449244452.
 
 Subdivide two exclusive protocol permission units without duplicating scope,
 dropping duties or allowing the original holder to exercise retired authority.
@@ -38,7 +39,7 @@ overlapping or expanded scopes. Hashes authenticate bytes, not semantic coverage
 | Reuse | PASS_ADMISSION | LangGraph broker, DAOhaus department router, A2A gateway integrate public API |
 | Contract count | PASS_ADMISSION | One actual authority state owner, no mirroring guard |
 | Differentiation | PASS_ADMISSION | Exhaustive/disjoint subdivision and root retirement differs from attenuation/cancellation/merge |
-| Claim-to-code | PASS_ADMISSION | Complete mapping below, network execution explicitly pending |
+| Claim-to-code | PASS_ADMISSION | Complete mapping below with primary/recovery canonical network evidence |
 | Full lifecycle | PASS_ADMISSION; PASS_EXECUTION | Finalized assent/review/ownership/both consumption and timed expiry/close, canonical reads in evidence/studionet |
 | Scope honesty | PASS_ADMISSION | No external property, legal title, copyright, execution, money or adoption claim |
 
