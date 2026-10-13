@@ -3,8 +3,8 @@
 ## Identity and product hook
 
 IDEA-042, partition-seal, Intelligent Contracts, DESIGN. Owner requested **Studionet
-61999** for this run; shared D1 stays unchanged. New independent contract-only repo.
-Public repo, product deployment, CI and lifecycle: PENDING_REAL_EVIDENCE.
+61999** for this deliverable. New independent contract-only repo.
+Product deployment and primary/recovery lifecycle verified; public CI pending.
 
 Subdivide two exclusive protocol permission units without duplicating scope,
 dropping duties or allowing the original holder to exercise retired authority.
@@ -39,7 +39,7 @@ overlapping or expanded scopes. Hashes authenticate bytes, not semantic coverage
 | Contract count | PASS_ADMISSION | One actual authority state owner, no mirroring guard |
 | Differentiation | PASS_ADMISSION | Exhaustive/disjoint subdivision and root retirement differs from attenuation/cancellation/merge |
 | Claim-to-code | PASS_ADMISSION | Complete mapping below, network execution explicitly pending |
-| Full lifecycle | PASS_ADMISSION; PENDING_EXECUTION | Designed assent/review/ownership/consumption and rejection/retry/expiry acceptance cases |
+| Full lifecycle | PASS_ADMISSION; PASS_EXECUTION | Finalized assent/review/ownership/both consumption and timed expiry/close, canonical reads in evidence/studionet |
 | Scope honesty | PASS_ADMISSION | No external property, legal title, copyright, execution, money or adoption claim |
 
 ## Actors / scope and non-goals
@@ -167,12 +167,12 @@ and normalized finalized SUCCESS/ERROR. Direct mode is local evidence, not netwo
 
 | Claim | Contract method/state | View/read | Test | Network evidence |
 | --- | --- | --- | --- | --- |
-| Two isolated immutable units | create_root/units | root/authority | creation/isolation | finalized create+read PENDING_EXECUTION |
-| Exact bilateral origin assent | propose/assent/flags | proposal | origin_digest_replay | both assents+reads PENDING_EXECUTION |
-| Independent meaning consensus | review/Attempt | attempt | semantic_replay/invariants | multi-validator successful review PENDING_EXECUTION |
-| Conserved ownership/root retirement | review/SPLIT | root/authority | no_duplicate_authority | old/new owner reads PENDING_EXECUTION |
-| One-time exact-owner exercise | consume/consumed | authority | frozen/wrong_owner/duplicate | both consumed units PENDING_EXECUTION |
-| Timed recovery | expire/close | root/proposal | stale_phase_boundary_recovery | expired trace PENDING_EXECUTION |
+| Two isolated immutable units | create_root/units | root/authority | creation/isolation | lifecycle.json create/root and independent recovery.json root |
+| Exact bilateral origin assent | propose/assent/flags | proposal | origin_digest_replay | lifecycle.json both assent receipts/proposal flags |
+| Independent meaning consensus | review/Attempt | attempt | semantic_replay/invariants | consensus.json NORMAL, majority and canonical attempt |
+| Conserved ownership/root retirement | review/SPLIT | root/authority | no_duplicate_authority | lifecycle.json SPLIT root/new owner reads |
+| One-time exact-owner exercise | consume/consumed | authority | frozen/wrong_owner/duplicate | lifecycle.json both finalized consumed units |
+| Timed recovery | expire/close | root/proposal | stale_phase_boundary_recovery | recovery.json restored root, expired proposal, closed root |
 
 ## Analogue/differentiation
 
@@ -195,7 +195,9 @@ resume from actual state; bind network/source commit/hash/version. Evidence only
 docs/evidence/studionet; generic diagnostic not counted as product contract.
 Public allowlist/hygiene, meaningful Git history, repo/CI/Explorer verification,
 unchanged grading bot NO BLOCKER, complete copy-ready <1000-char Portal fields and final
-master reread. Owner submits. Every product execution item currently PENDING_EXECUTION.
+master reread. Owner submits. Primary partition/both consumption and timed recovery/
+close are verified. Other semantic classes and negative boundary branches are
+local-test evidence only. No production gateway execution claimed.
 
 ## Honest limits / kill criteria
 

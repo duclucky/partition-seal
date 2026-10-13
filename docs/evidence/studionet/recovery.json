@@ -1,0 +1,168 @@
+{
+  "network": "studionet",
+  "chainId": 61999,
+  "contractAddress": "0xF7fa8F9b9Cb0c9195675570e11fDD9dc321Bf8c5",
+  "sourceCommit": "bca1a72f95e769c2bdef583f6e344d239fce91f9",
+  "sourceSHA256": "9c052ca545441560b7d63e9dafa8f5be61e1965ac3182a4fd20e0014004f864a",
+  "rootId": "partition-recovery-9c052ca5",
+  "rootExpiry": 1791916752,
+  "steps": {
+    "create": {
+      "transactionHash": "0x28a4ff88ccace6c51974c57c63a1d96ceec5882500fb9a19b8ad536fadb7ff98",
+      "status": "FINALIZED",
+      "functionName": "create_root",
+      "valueGen": "0",
+      "executionResult": "SUCCESS",
+      "consensusResult": "MAJORITY_AGREE",
+      "contractAddress": "0xF7fa8F9b9Cb0c9195675570e11fDD9dc321Bf8c5",
+      "validatorCount": 4,
+      "explorerUrl": "https://explorer-studio.genlayer.com/tx/0x28a4ff88ccace6c51974c57c63a1d96ceec5882500fb9a19b8ad536fadb7ff98"
+    },
+    "propose": {
+      "transactionHash": "0xb07e67a77b611a7e8757b4dde4bbd75620373414030204073cfade3669fc1342",
+      "status": "FINALIZED",
+      "functionName": "propose_partition",
+      "valueGen": "0",
+      "executionResult": "SUCCESS",
+      "consensusResult": "MAJORITY_AGREE",
+      "contractAddress": "0xF7fa8F9b9Cb0c9195675570e11fDD9dc321Bf8c5",
+      "validatorCount": 4,
+      "explorerUrl": "https://explorer-studio.genlayer.com/tx/0xb07e67a77b611a7e8757b4dde4bbd75620373414030204073cfade3669fc1342"
+    },
+    "expire": {
+      "transactionHash": "0x701fa6a3e45d111e602b7a3f69a4d401721895f0102f3ae2fc57cc4140263c12",
+      "status": "FINALIZED",
+      "functionName": "expire_proposal",
+      "valueGen": "0",
+      "executionResult": "SUCCESS",
+      "consensusResult": "MAJORITY_AGREE",
+      "contractAddress": "0xF7fa8F9b9Cb0c9195675570e11fDD9dc321Bf8c5",
+      "validatorCount": 4,
+      "explorerUrl": "https://explorer-studio.genlayer.com/tx/0x701fa6a3e45d111e602b7a3f69a4d401721895f0102f3ae2fc57cc4140263c12"
+    },
+    "close": {
+      "transactionHash": "0xcf695df119337613b350ecbb675a79ca2e718eb6049e1dc2f6fef0d651b520d6",
+      "status": "FINALIZED",
+      "functionName": "close_root",
+      "valueGen": "0",
+      "executionResult": "SUCCESS",
+      "consensusResult": "MAJORITY_AGREE",
+      "contractAddress": "0xF7fa8F9b9Cb0c9195675570e11fDD9dc321Bf8c5",
+      "validatorCount": 4,
+      "explorerUrl": "https://explorer-studio.genlayer.com/tx/0xcf695df119337613b350ecbb675a79ca2e718eb6049e1dc2f6fef0d651b520d6"
+    }
+  },
+  "canonicalReads": {
+    "frozen": {
+      "root": {
+        "U0": "May inspect the archive privately with attribution; no distribution.",
+        "U1": "May print the archive privately with attribution; no distribution.",
+        "expiry": 1791916752,
+        "holder": "0xc495ef51618d03267a1f227afe5b27b38c748272",
+        "proposal_id": "partition-recovery-9c052ca5:P1",
+        "root_id": "partition-recovery-9c052ca5",
+        "sequence": 1,
+        "status": "FROZEN",
+        "target": "archive"
+      },
+      "U0": {
+        "active": false,
+        "consumed": false,
+        "expiry": 1791916752,
+        "owner": "0xc495ef51618d03267a1f227afe5b27b38c748272",
+        "root_id": "partition-recovery-9c052ca5",
+        "scope": "May inspect the archive privately with attribution; no distribution.",
+        "unit_id": "partition-recovery-9c052ca5:U0"
+      },
+      "U1": {
+        "active": false,
+        "consumed": false,
+        "expiry": 1791916752,
+        "owner": "0xc495ef51618d03267a1f227afe5b27b38c748272",
+        "root_id": "partition-recovery-9c052ca5",
+        "scope": "May print the archive privately with attribution; no distribution.",
+        "unit_id": "partition-recovery-9c052ca5:U1"
+      }
+    },
+    "restored": {
+      "root": {
+        "U0": "May inspect the archive privately with attribution; no distribution.",
+        "U1": "May print the archive privately with attribution; no distribution.",
+        "expiry": 1791916752,
+        "holder": "0xc495ef51618d03267a1f227afe5b27b38c748272",
+        "proposal_id": "partition-recovery-9c052ca5:P1",
+        "root_id": "partition-recovery-9c052ca5",
+        "sequence": 1,
+        "status": "ACTIVE",
+        "target": "archive"
+      },
+      "proposal": {
+        "assent_a": false,
+        "assent_b": false,
+        "attempts": 0,
+        "deadline": 1791916634,
+        "digest": "4d59118c8f7b0d5869816131566fb5f74de9116672eb7d25c8981be48195f6f7",
+        "proposal_id": "partition-recovery-9c052ca5:P1",
+        "recipient_a": "0x45248be151f7f7e230150db23774733cd966eb45",
+        "recipient_b": "0x45ad397c438397a702b53a7499a78d08961d39db",
+        "root_id": "partition-recovery-9c052ca5",
+        "scope_a": "May inspect the archive privately with attribution; no distribution.",
+        "scope_b": "May print the archive privately with attribution; no distribution.",
+        "status": "EXPIRED"
+      },
+      "U0": {
+        "active": true,
+        "consumed": false,
+        "expiry": 1791916752,
+        "owner": "0xc495ef51618d03267a1f227afe5b27b38c748272",
+        "root_id": "partition-recovery-9c052ca5",
+        "scope": "May inspect the archive privately with attribution; no distribution.",
+        "unit_id": "partition-recovery-9c052ca5:U0"
+      },
+      "U1": {
+        "active": true,
+        "consumed": false,
+        "expiry": 1791916752,
+        "owner": "0xc495ef51618d03267a1f227afe5b27b38c748272",
+        "root_id": "partition-recovery-9c052ca5",
+        "scope": "May print the archive privately with attribution; no distribution.",
+        "unit_id": "partition-recovery-9c052ca5:U1"
+      }
+    },
+    "closed": {
+      "root": {
+        "U0": "May inspect the archive privately with attribution; no distribution.",
+        "U1": "May print the archive privately with attribution; no distribution.",
+        "expiry": 1791916752,
+        "holder": "0xc495ef51618d03267a1f227afe5b27b38c748272",
+        "proposal_id": "partition-recovery-9c052ca5:P1",
+        "root_id": "partition-recovery-9c052ca5",
+        "sequence": 1,
+        "status": "CLOSED",
+        "target": "archive"
+      },
+      "U0": {
+        "active": false,
+        "consumed": false,
+        "expiry": 1791916752,
+        "owner": "0xc495ef51618d03267a1f227afe5b27b38c748272",
+        "root_id": "partition-recovery-9c052ca5",
+        "scope": "May inspect the archive privately with attribution; no distribution.",
+        "unit_id": "partition-recovery-9c052ca5:U0"
+      },
+      "U1": {
+        "active": false,
+        "consumed": false,
+        "expiry": 1791916752,
+        "owner": "0xc495ef51618d03267a1f227afe5b27b38c748272",
+        "root_id": "partition-recovery-9c052ca5",
+        "scope": "May print the archive privately with attribution; no distribution.",
+        "unit_id": "partition-recovery-9c052ca5:U1"
+      }
+    }
+  },
+  "proposalDeadline": 1791916634,
+  "proposalId": "partition-recovery-9c052ca5:P1",
+  "complete": true,
+  "verifiedAt": "2026-10-13T18:39:57.088Z"
+}

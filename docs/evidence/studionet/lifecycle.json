@@ -1,0 +1,156 @@
+{
+  "network": "studionet",
+  "chainId": 61999,
+  "contractAddress": "0xF7fa8F9b9Cb0c9195675570e11fDD9dc321Bf8c5",
+  "sourceCommit": "bca1a72f95e769c2bdef583f6e344d239fce91f9",
+  "sourceSHA256": "9c052ca545441560b7d63e9dafa8f5be61e1965ac3182a4fd20e0014004f864a",
+  "rootId": "partition-demo-9c052ca5",
+  "holder": "0xC495ef51618D03267A1f227aFe5b27B38c748272",
+  "recipientA": "0x45248be151F7f7e230150db23774733Cd966Eb45",
+  "recipientB": "0x45aD397c438397A702B53a7499a78D08961D39Db",
+  "rootExpiry": 1791923427,
+  "proposalDeadline": 1791919827,
+  "steps": {
+    "create": {
+      "transactionHash": "0x26a07287745dd5f961d2ee4f3fa6ea8c879113a73c9fb7eb2ad5aa4865887591",
+      "status": "FINALIZED",
+      "functionName": "create_root",
+      "valueGen": "0",
+      "executionResult": "SUCCESS",
+      "consensusResult": "MAJORITY_AGREE",
+      "contractAddress": "0xF7fa8F9b9Cb0c9195675570e11fDD9dc321Bf8c5",
+      "validatorCount": 4,
+      "explorerUrl": "https://explorer-studio.genlayer.com/tx/0x26a07287745dd5f961d2ee4f3fa6ea8c879113a73c9fb7eb2ad5aa4865887591"
+    },
+    "propose": {
+      "transactionHash": "0x4495f5638aae7b660b6511bb2c3d96fe489a4436a4406442a15bd9026c422f80",
+      "status": "FINALIZED",
+      "functionName": "propose_partition",
+      "valueGen": "0",
+      "executionResult": "SUCCESS",
+      "consensusResult": "MAJORITY_AGREE",
+      "contractAddress": "0xF7fa8F9b9Cb0c9195675570e11fDD9dc321Bf8c5",
+      "validatorCount": 4,
+      "explorerUrl": "https://explorer-studio.genlayer.com/tx/0x4495f5638aae7b660b6511bb2c3d96fe489a4436a4406442a15bd9026c422f80"
+    },
+    "assentA": {
+      "transactionHash": "0x079142ab0c21bf6b942db37b7bc1c7ed1a0d99f6695ee85a789d40484aaa8984",
+      "status": "FINALIZED",
+      "functionName": "assent",
+      "valueGen": "0",
+      "executionResult": "SUCCESS",
+      "consensusResult": "MAJORITY_AGREE",
+      "contractAddress": "0xF7fa8F9b9Cb0c9195675570e11fDD9dc321Bf8c5",
+      "validatorCount": 4,
+      "explorerUrl": "https://explorer-studio.genlayer.com/tx/0x079142ab0c21bf6b942db37b7bc1c7ed1a0d99f6695ee85a789d40484aaa8984"
+    },
+    "assentB": {
+      "transactionHash": "0x057ab8617a8b69c0c74387c0f2e6636c59a575deaf6b9f322108afd06a279dd9",
+      "status": "FINALIZED",
+      "functionName": "assent",
+      "valueGen": "0",
+      "executionResult": "SUCCESS",
+      "consensusResult": "MAJORITY_AGREE",
+      "contractAddress": "0xF7fa8F9b9Cb0c9195675570e11fDD9dc321Bf8c5",
+      "validatorCount": 4,
+      "explorerUrl": "https://explorer-studio.genlayer.com/tx/0x057ab8617a8b69c0c74387c0f2e6636c59a575deaf6b9f322108afd06a279dd9"
+    },
+    "review": {
+      "transactionHash": "0xa823fb63c830d339e2796cc6caf811ed2efd3b5a829216469e5736941410096b",
+      "status": "FINALIZED",
+      "functionName": "review_partition",
+      "valueGen": "0",
+      "executionResult": "SUCCESS",
+      "consensusResult": "MAJORITY_AGREE",
+      "contractAddress": "0xF7fa8F9b9Cb0c9195675570e11fDD9dc321Bf8c5",
+      "validatorCount": 4,
+      "explorerUrl": "https://explorer-studio.genlayer.com/tx/0xa823fb63c830d339e2796cc6caf811ed2efd3b5a829216469e5736941410096b"
+    },
+    "consumeU0": {
+      "transactionHash": "0xf3114aec66e462e509e925d1eeceab964d51f04cfae6b44e4f9e4d8bccc5804b",
+      "status": "FINALIZED",
+      "functionName": "consume",
+      "valueGen": "0",
+      "executionResult": "SUCCESS",
+      "consensusResult": "MAJORITY_AGREE",
+      "contractAddress": "0xF7fa8F9b9Cb0c9195675570e11fDD9dc321Bf8c5",
+      "validatorCount": 4,
+      "explorerUrl": "https://explorer-studio.genlayer.com/tx/0xf3114aec66e462e509e925d1eeceab964d51f04cfae6b44e4f9e4d8bccc5804b"
+    },
+    "consumeU1": {
+      "transactionHash": "0xfb58790d1da6eff0880effe722a33a0e1ff302e883092e556a781188b1229d9b",
+      "status": "FINALIZED",
+      "functionName": "consume",
+      "valueGen": "0",
+      "executionResult": "SUCCESS",
+      "consensusResult": "MAJORITY_AGREE",
+      "contractAddress": "0xF7fa8F9b9Cb0c9195675570e11fDD9dc321Bf8c5",
+      "validatorCount": 4,
+      "explorerUrl": "https://explorer-studio.genlayer.com/tx/0xfb58790d1da6eff0880effe722a33a0e1ff302e883092e556a781188b1229d9b"
+    }
+  },
+  "canonicalReads": {
+    "root": {
+      "U0": "May read the registered article for private study with attribution; no distribution.",
+      "U1": "May print the registered article for private study with attribution; no distribution.",
+      "expiry": 1791923427,
+      "holder": "0xc495ef51618d03267a1f227afe5b27b38c748272",
+      "proposal_id": "partition-demo-9c052ca5:P1",
+      "root_id": "partition-demo-9c052ca5",
+      "sequence": 1,
+      "status": "SPLIT",
+      "target": "article"
+    },
+    "proposal": {
+      "assent_a": true,
+      "assent_b": true,
+      "attempts": 1,
+      "deadline": 1791919827,
+      "digest": "de90eaa3643b1d495c3967cb3be15caff132a60fb04c7ccd6863ab5a853d7cdf",
+      "proposal_id": "partition-demo-9c052ca5:P1",
+      "recipient_a": "0x45248be151f7f7e230150db23774733cd966eb45",
+      "recipient_b": "0x45ad397c438397a702b53a7499a78d08961d39db",
+      "root_id": "partition-demo-9c052ca5",
+      "scope_a": "May view the registered article privately with source credit; no sharing.",
+      "scope_b": "May make a paper copy of the registered article for private study with source credit; no sharing.",
+      "status": "PARTITIONED"
+    },
+    "attempt": {
+      "attempt_id": "partition-demo-9c052ca5:P1:T1",
+      "coverage": {
+        "U0": "A",
+        "U1": "B"
+      },
+      "limits": {
+        "A": "WITHIN",
+        "B": "WITHIN"
+      },
+      "outcome": "PARTITIONED",
+      "proposal_id": "partition-demo-9c052ca5:P1",
+      "reason": "U0 (read for private study with attribution, no distribution) is fully matched by child A: 'view' is semantically equivalent to reading the article, 'privately' preserves the private-use constraint, 'source credit' retains the attribution duty, and 'no sharing' retains the no-distribution prohibition; A adds no printing right, so it does not cover U1. U1 (print for private study with attribution, no distribution) is fully matched by child B: making a paper copy is a print-form reproduction, 'for private study' matches verbatim, 'source credit' retains the attribution duty, and 'no sharing' retains the no-distribution prohibition; B grants no reading right beyond incidental use, so it does not cover U0. Limits: child A's permission (private viewing with credit, no sharing) falls entirely in",
+      "timestamp": 1791916390
+    },
+    "U0": {
+      "active": false,
+      "consumed": true,
+      "expiry": 1791923427,
+      "owner": "0x45248be151f7f7e230150db23774733cd966eb45",
+      "root_id": "partition-demo-9c052ca5",
+      "scope": "May view the registered article privately with source credit; no sharing.",
+      "unit_id": "partition-demo-9c052ca5:U0"
+    },
+    "U1": {
+      "active": false,
+      "consumed": true,
+      "expiry": 1791923427,
+      "owner": "0x45ad397c438397a702b53a7499a78d08961d39db",
+      "root_id": "partition-demo-9c052ca5",
+      "scope": "May make a paper copy of the registered article for private study with source credit; no sharing.",
+      "unit_id": "partition-demo-9c052ca5:U1"
+    }
+  },
+  "limits": "Internal protocol rights only; no external ownership/execution, native GEN custody, browser or adoption proof.",
+  "nativeBalanceGen": "0",
+  "completePrimaryLifecycle": true,
+  "verifiedAt": "2026-10-13T18:36:47.080Z"
+}

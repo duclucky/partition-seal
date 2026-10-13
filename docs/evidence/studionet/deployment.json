@@ -1,0 +1,54 @@
+{
+  "network": "studionet",
+  "chainId": 61999,
+  "sourceCommit": "bca1a72f95e769c2bdef583f6e344d239fce91f9",
+  "sourceSHA256": "9c052ca545441560b7d63e9dafa8f5be61e1965ac3182a4fd20e0014004f864a",
+  "contractRevision": "PARTITION_SEAL_V1",
+  "contractApiVersion": "v0.2.16",
+  "dependsRunner": "py-genlayer:1jb45aa8ynh2a9c9xn3b7qqh8sm5q93hwfp7jqmwsfhh8jpz09h6",
+  "transactionHash": "0x68fe0bb658db8b0a9c76ab50496e9ea35095cc71355aa258f0d88a7b465abbac",
+  "status": "FINALIZED",
+  "valueGen": "0",
+  "submittedAt": "2026-10-13T18:29:02.316Z",
+  "executionResult": "SUCCESS",
+  "consensusResult": "MAJORITY_AGREE",
+  "contractAddress": "0xF7fa8F9b9Cb0c9195675570e11fDD9dc321Bf8c5",
+  "validatorCount": 4,
+  "explorerAddressUrl": "https://explorer-studio.genlayer.com/address/0xF7fa8F9b9Cb0c9195675570e11fDD9dc321Bf8c5",
+  "explorerDeployTxUrl": "https://explorer-studio.genlayer.com/tx/0x68fe0bb658db8b0a9c76ab50496e9ea35095cc71355aa258f0d88a7b465abbac",
+  "schema": {
+    "constructor": true,
+    "methods": [
+      "assent",
+      "close_root",
+      "consume",
+      "create_root",
+      "expire_proposal",
+      "get_attempt",
+      "get_authority",
+      "get_policy",
+      "get_proposal",
+      "get_root",
+      "propose_partition",
+      "review_partition"
+    ],
+    "count": 12
+  },
+  "canonicalPolicy": {
+    "chain_id": 61999,
+    "children": [
+      "A",
+      "B"
+    ],
+    "max_attempts": 3,
+    "native_value_custody": false,
+    "network": "studionet",
+    "revision": "PARTITION_SEAL_V1",
+    "source": "https://www.w3.org/TR/2018/REC-odrl-model-20180215/",
+    "units": [
+      "U0",
+      "U1"
+    ]
+  },
+  "verifiedAt": "2026-10-13T18:29:46.450Z"
+}
