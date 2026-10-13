@@ -269,3 +269,18 @@ def test_wrong_owner_cannot_consume_original_unit(contract,direct_vm,direct_acco
     direct_vm.sender=direct_accounts[1];before=snapshot(contract,root)
     with pytest.raises(Exception,match="owner"):contract.consume(root+":"+unit)
     assert snapshot(contract,root)==before
+
+@pytest.mark.parametrize("delta",[-1,0,1])
+@pytest.mark.parametrize("boundary",["minimum_lead","root_expiry"])
+def test_proposal_deadline_interval_lower_and_upper_equality(contract,direct_vm,direct_accounts,delta,boundary):
+    root=create(contract,direct_vm,direct_accounts)
+    deadline=(NOW+30 if boundary=="minimum_lead" else ROOT_EXPIRY)+delta
+    before=snapshot(contract,root)
+    if NOW+30<=deadline<ROOT_EXPIRY:
+        contract.propose_partition(root,addr(direct_accounts[1]),A,addr(direct_accounts[2]),B,deadline)
+        pid=view(contract.get_root(root))["proposal_id"]
+        assert view(contract.get_proposal(pid))["deadline"]==deadline
+    else:
+        with pytest.raises(Exception,match="deadline"):
+            contract.propose_partition(root,addr(direct_accounts[1]),A,addr(direct_accounts[2]),B,deadline)
+        assert snapshot(contract,root)==before
