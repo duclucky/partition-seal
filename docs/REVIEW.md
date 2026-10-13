@@ -27,9 +27,11 @@ no skipped tests; semantic lint recognizes PartitionSeal, 12 methods; ASCII/head
 and NO-APP check passes. Direct-mode mocks are local proof only. Deployed source,
 schema and Result: SUCCESS are independently recorded in DEPLOYMENT.md.
 
-No public behavior change was applied during this review. Remaining required
-acceptance evidence: primary/recovery canonical lifecycle, final public repo/CI,
-unchanged full grading check, and final master/checklist audit.
+No public behavior change was applied during this review. Primary partition/both
+consumptions and timed recovery/close are finalized with canonical reads. Review
+has three AGREE validators and one ERROR validator, final MAJORITY_AGREE/SUCCESS;
+the error's cause is unknown and is preserved. Remaining acceptance items are
+final public repo/CI, unchanged full grading check and final master/checklist audit.
 
 Limits: two-unit, one-level partition; fixed recipients; max3 attempts; internal
 permissions only. No actual external gateway, crypto title, law or GEN custody.
