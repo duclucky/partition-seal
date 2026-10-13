@@ -22,7 +22,7 @@ Reviewed against the Intelligent Contracts bar after implementation.
 - Reuse: documented exact methods/views for three proposed downstream builders;
   no app, generic registry, prior-project extraction or adoption claim.
 
-Fresh local check: `npm run check`, exit0: **49 direct cases +7 Node receipt cases**,
+Fresh local check: `npm run check`, exit0: **55 direct cases +7 Node receipt cases**,
 no skipped tests; semantic lint recognizes PartitionSeal, 12 methods; ASCII/header
 and NO-APP check passes. Direct-mode mocks are local proof only. Deployed source,
 schema and Result: SUCCESS are independently recorded in DEPLOYMENT.md.

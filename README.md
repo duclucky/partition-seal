@@ -16,7 +16,7 @@ collected by the application. Rights are internal protocol permissions; no exter
 copyright, property, legal title, tool execution or adoption is claimed.
 
 Build with Python3.12 and Node, install requirements-dev.txt into .venv, run npm ci
-and npm run check. Local check passes 49 direct cases plus 7 Node receipt cases;
+and npm run check. Local check passes 55 direct cases plus 7 Node receipt cases;
 one ASCII contract, 12 methods (7 writes, 5 views), no skipped tests.
 
 ## Deployment
