@@ -1,0 +1,13 @@
+{
+  "name": "partition-seal",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "check": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/check.ps1",
+    "lint:contracts": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/check.ps1 -Only lint",
+    "test:direct": ".venv\\Scripts\\gltest.exe tests/direct -q",
+    "test:tooling": "node --test tests/receipts.test.mjs"
+  },
+  "dependencies": { "genlayer-js": "1.1.8" }
+}
