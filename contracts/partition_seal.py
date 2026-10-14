@@ -7,7 +7,21 @@ import hashlib
 import json
 
 SOURCE_URL = "https://www.w3.org/TR/2018/REC-odrl-model-20180215/"
-REVISION = "PARTITION_SEAL_V1"
+REVISION = "PARTITION_SEAL_V2_ESCROW"
+GEN = 10**18
+
+
+@gl.evm.contract_interface
+class _Recipient:
+    class View:
+        pass
+    class Write:
+        pass
+
+
+def _no_value():
+    if gl.message.value != 0:
+        raise gl.vm.UserError("nonpayable entrypoint")
 
 
 def _address(value):
@@ -103,6 +117,8 @@ class Proposal:
     assent_a: bool
     assent_b: bool
     attempts: bigint
+    escrow: bigint
+    payment_status: str
 
 
 @allow_storage
@@ -123,9 +139,48 @@ class PartitionSeal(gl.Contract):
     units: TreeMap[str, Unit]
     proposals: TreeMap[str, Proposal]
     attempts: TreeMap[str, Attempt]
+    credits: TreeMap[str, bigint]
+    total_received: bigint
+    total_withdrawn: bigint
+    total_escrow: bigint
+    total_credit: bigint
 
     def __init__(self):
-        pass
+        _no_value()
+        self.total_received = bigint(0)
+        self.total_withdrawn = bigint(0)
+        self.total_escrow = bigint(0)
+        self.total_credit = bigint(0)
+
+    def _accounting(self):
+        values = (self.total_received, self.total_withdrawn, self.total_escrow, self.total_credit)
+        if any(value < 0 for value in values) or self.total_received != self.total_withdrawn + self.total_escrow + self.total_credit:
+            raise gl.vm.UserError("accounting invariant")
+
+    def _credit(self, owner, amount):
+        key = _address(owner)
+        previous = self.credits[key] if key in self.credits else bigint(0)
+        self.credits[key] = bigint(previous + amount)
+        self.total_credit += amount
+
+    def _release(self, proposal, root, seller):
+        self._accounting()
+        expected = GEN * (int(proposal.assent_a) + int(proposal.assent_b))
+        if proposal.payment_status != "LOCKED" or proposal.escrow != expected or proposal.escrow > self.total_escrow:
+            raise gl.vm.UserError("payment settlement invariant")
+        if seller and (not proposal.assent_a or not proposal.assent_b or expected != 2 * GEN):
+            raise gl.vm.UserError("both paid recipients required")
+        if seller:
+            self._credit(root.holder, proposal.escrow)
+        else:
+            if proposal.assent_a:
+                self._credit(proposal.recipient_a, bigint(GEN))
+            if proposal.assent_b:
+                self._credit(proposal.recipient_b, bigint(GEN))
+        self.total_escrow -= proposal.escrow
+        proposal.escrow = bigint(0)
+        proposal.payment_status = "HOLDER_CREDIT" if seller else "REFUND_CREDIT"
+        self._accounting()
 
     def _root(self, root_id):
         if root_id not in self.roots:
@@ -157,11 +212,12 @@ class PartitionSeal(gl.Contract):
             "u0": root.u0, "u1": root.u1, "root_expiry": str(root.expiry),
             "a": _address(proposal.recipient_a), "b": _address(proposal.recipient_b),
             "scope_a": proposal.scope_a, "scope_b": proposal.scope_b,
-            "deadline": str(proposal.deadline), "source": SOURCE_URL}
+            "deadline": str(proposal.deadline), "source": SOURCE_URL, "price_per_recipient_gen": "1"}
         return hashlib.sha256(json.dumps(canonical, sort_keys=True, separators=(",", ":")).encode("utf-8")).hexdigest()
 
     @gl.public.write
     def create_root(self, root_id: str, target: str, u0: str, u1: str, expiry: int) -> None:
+        _no_value()
         if not root_id or len(root_id) > 48 or any(c not in "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_-" for c in root_id):
             raise gl.vm.UserError("invalid root ID")
         if root_id in self.roots:
@@ -182,6 +238,7 @@ class PartitionSeal(gl.Contract):
     @gl.public.write
     def propose_partition(self, root_id: str, recipient_a: Address, scope_a: str,
                           recipient_b: Address, scope_b: str, deadline: int) -> None:
+        _no_value()
         try:
             recipient_a = Address(recipient_a)
             recipient_b = Address(recipient_b)
@@ -202,7 +259,7 @@ class PartitionSeal(gl.Contract):
         if not _now() + 30 <= deadline < root.expiry:
             raise gl.vm.UserError("invalid proposal deadline")
         proposal_id = root_id + ":P" + str(root.sequence + 1)
-        p = Proposal(root_id, recipient_a, recipient_b, scope_a, scope_b, bigint(deadline), "", "FROZEN", False, False, bigint(0))
+        p = Proposal(root_id, recipient_a, recipient_b, scope_a, scope_b, bigint(deadline), "", "FROZEN", False, False, bigint(0), bigint(0), "LOCKED")
         p.digest = self._digest(proposal_id, p)
         root.sequence += bigint(1)
         root.proposal_id = proposal_id
@@ -210,7 +267,7 @@ class PartitionSeal(gl.Contract):
         self.proposals[proposal_id] = p
         self.roots[root_id] = root
 
-    @gl.public.write
+    @gl.public.write.payable
     def assent(self, proposal_id: str, digest: str) -> None:
         p = self._proposal(proposal_id)
         root = self._root(p.root_id)
@@ -226,16 +283,26 @@ class PartitionSeal(gl.Contract):
         is_a = gl.message.sender_address == p.recipient_a
         if (is_a and p.assent_a) or (not is_a and p.assent_b):
             raise gl.vm.UserError("already assented")
+        if gl.message.value != GEN:
+            raise gl.vm.UserError("assent requires exactly 1 GEN")
+        self._accounting()
+        if p.payment_status != "LOCKED" or p.escrow != GEN * (int(p.assent_a) + int(p.assent_b)):
+            raise gl.vm.UserError("payment settlement invariant")
         if is_a:
             p.assent_a = True
         else:
             p.assent_b = True
         if p.assent_a and p.assent_b:
             p.status = "READY"
+        p.escrow += bigint(GEN)
+        self.total_received += bigint(GEN)
+        self.total_escrow += bigint(GEN)
+        self._accounting()
         self.proposals[proposal_id] = p
 
     @gl.public.write
     def review_partition(self, proposal_id: str) -> None:
+        _no_value()
         p = self._proposal(proposal_id)
         root = self._root(p.root_id)
         self._holder(root)
@@ -251,6 +318,9 @@ class PartitionSeal(gl.Contract):
             raise gl.vm.UserError("attempt limit reached")
         if p.digest != self._digest(proposal_id, p):
             raise gl.vm.UserError("canonical digest mismatch")
+        self._accounting()
+        if p.payment_status != "LOCKED" or p.escrow != 2 * GEN:
+            raise gl.vm.UserError("both paid recipients required")
         inputs = {"target": root.target, "units": {"U0": root.u0, "U1": root.u1},
                   "children": {"A": p.scope_a, "B": p.scope_b}}
         encoded = json.dumps(inputs, sort_keys=True)
@@ -296,6 +366,7 @@ class PartitionSeal(gl.Contract):
         attempt = Attempt(proposal_id, result["coverage"]["U0"], result["coverage"]["U1"],
                           result["limits"]["A"], result["limits"]["B"], outcome, result["reason"], _now())
         if outcome == "PARTITIONED":
+            self._release(p, root, True)
             for unit_index in ("U0", "U1"):
                 unit_id = p.root_id + ":" + unit_index
                 unit = self.units[unit_id]
@@ -305,6 +376,7 @@ class PartitionSeal(gl.Contract):
                 self.units[unit_id] = unit
             root.status = "SPLIT"
         elif outcome == "REJECTED":
+            self._release(p, root, False)
             root.status = "ACTIVE"
         p.status = outcome
         p.attempts = index
@@ -314,6 +386,7 @@ class PartitionSeal(gl.Contract):
 
     @gl.public.write
     def consume(self, unit_id: str) -> None:
+        _no_value()
         if unit_id not in self.units:
             raise gl.vm.UserError("unknown unit")
         unit = self.units[unit_id]
@@ -332,6 +405,7 @@ class PartitionSeal(gl.Contract):
 
     @gl.public.write
     def expire_proposal(self, proposal_id: str) -> None:
+        _no_value()
         p = self._proposal(proposal_id)
         root = self._root(p.root_id)
         self._holder(root)
@@ -339,6 +413,7 @@ class PartitionSeal(gl.Contract):
             raise gl.vm.UserError("premature expiry")
         if root.status != "FROZEN" or root.proposal_id != proposal_id or p.status not in ("FROZEN", "READY", "RETRYABLE"):
             raise gl.vm.UserError("proposal recovery forbidden state")
+        self._release(p, root, False)
         p.status = "EXPIRED"
         root.status = "ACTIVE" if _now() < root.expiry else "CLOSED"
         self.proposals[proposal_id] = p
@@ -346,6 +421,7 @@ class PartitionSeal(gl.Contract):
 
     @gl.public.write
     def close_root(self, root_id: str) -> None:
+        _no_value()
         root = self._root(root_id)
         self._holder(root)
         if _now() < root.expiry:
@@ -354,10 +430,49 @@ class PartitionSeal(gl.Contract):
             raise gl.vm.UserError("root already closed")
         if root.status == "FROZEN":
             p = self._proposal(root.proposal_id)
+            self._release(p, root, False)
             p.status = "EXPIRED"
             self.proposals[root.proposal_id] = p
         root.status = "CLOSED"
         self.roots[root_id] = root
+
+    @gl.public.write
+    def withdraw(self) -> None:
+        _no_value()
+        self._accounting()
+        sender = gl.message.sender_address
+        key = _address(sender)
+        amount = self.credits[key] if key in self.credits else bigint(0)
+        if amount <= 0:
+            raise gl.vm.UserError("no own credit")
+        self.credits[key] = bigint(0)
+        self.total_credit -= amount
+        self.total_withdrawn += amount
+        self._accounting()
+        _Recipient(sender).emit_transfer(value=u256(amount))
+
+    @gl.public.view
+    def get_credit(self, owner: str) -> str:
+        try:
+            key = _address(Address(owner))
+        except Exception:
+            raise gl.vm.UserError("invalid credit owner")
+        amount = self.credits[key] if key in self.credits else bigint(0)
+        return json.dumps({"owner": key, "credit_gen": str(amount // GEN)}, sort_keys=True)
+
+    @gl.public.view
+    def get_accounting(self) -> str:
+        self._accounting()
+        return json.dumps({"received_gen": str(self.total_received // GEN),
+            "withdrawn_gen": str(self.total_withdrawn // GEN), "escrow_gen": str(self.total_escrow // GEN),
+            "credit_gen": str(self.total_credit // GEN), "liability_gen": str((self.total_escrow + self.total_credit) // GEN)}, sort_keys=True)
+
+    @gl.public.view
+    def get_payment(self, proposal_id: str) -> str:
+        p = self._proposal(proposal_id)
+        return json.dumps({"proposal_id": proposal_id, "status": p.payment_status,
+            "paid_a": p.assent_a, "paid_b": p.assent_b, "price_per_recipient_gen": "1",
+            "escrow_gen": str(p.escrow // GEN)}, sort_keys=True)
 
     @gl.public.view
     def get_root(self, root_id: str) -> str:
@@ -397,4 +512,4 @@ class PartitionSeal(gl.Contract):
     def get_policy(self) -> str:
         return json.dumps({"revision": REVISION, "network": "studionet", "chain_id": 61999,
             "source": SOURCE_URL, "units": ["U0", "U1"], "children": ["A", "B"], "max_attempts": 3,
-            "native_value_custody": False}, sort_keys=True)
+            "native_value_custody": True, "price_per_recipient_gen": "1"}, sort_keys=True)

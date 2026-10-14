@@ -5,20 +5,29 @@ when an original holder subdivides their semantic scopes between two recipients.
 Independent GenLayer validators judge complete coverage and non-widening; code
 reassigns each existing unit exactly once and retires original authority.
 
-Status: contract and Studionet primary/recovery lifecycle verified; public
-[CI passes](https://github.com/duclucky/partition-seal/actions/runs/38449244452).
+Status: owner-approved V2 adds paid escrow. Local lint/direct tests pass;
+**V2 real payment evidence, new deployment and CI are pending**. V1 evidence
+proves the earlier noncustodial lifecycle only and is being archived.
 [Specification](docs/README.md) defines the authority model, safety
 rows, meaning validator, temporal guards and executable acceptance cases.
 
 Owner-selected network for this run: **Studionet**, chain61999. It is separate
 from Studio Dev. API v0.2.16 / concrete runner / genlayer-js1.1.8 form one pinned
-unit. No user-facing app or Vercel project. No native GEN custody, deposits or fees
-collected by the application. Rights are internal protocol permissions; no external
+unit. No user-facing app or Vercel project. Each paid assent escrows1GEN;
+valid semantic partition credits2GEN to the original holder, rejection/expiry
+credits each actual payer for refund, with own-credit withdrawal.
+Rights are internal protocol permissions; no external
 copyright, property, legal title, tool execution or adoption is claimed.
 
 Build with Python3.12 and Node, install requirements-dev.txt into .venv, run npm ci
-and npm run check. Local check passes 55 direct cases plus 7 Node receipt cases;
-one ASCII contract, 12 methods (7 writes, 5 views), no skipped tests.
+and npm run check. Local direct check passes90 cases; receipt checks are separately
+run by the same command. One ASCII contract,16 methods (8 writes,8 views).
+
+[Payment design and safety matrices](docs/PAYMENT-PLAN.md) govern V2.
+
+The remaining deployment/example sections below describe **historical V1** until
+the new immutable V2 deployment and paid lifecycle are verified. They must not be
+used as evidence of V2 deposits, payouts, refunds or withdrawals.
 
 ## Deployment
 

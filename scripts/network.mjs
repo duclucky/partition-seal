@@ -20,11 +20,11 @@ export function save(name,value){
 }
 function env(){
  const values={};
- for(const p of [path.join(ROOT,'..','.env'),path.join(ROOT,'.env')]){
+ for(const p of [path.join(ROOT,'.env'),path.join(ROOT,'..','.env')]){
   if(!fs.existsSync(p))continue;
   for(const line of fs.readFileSync(p,'utf8').split(/\r?\n/)){
    const m=line.match(/^\s*([A-Za-z_][A-Za-z0-9_]*)\s*=\s*(.*?)\s*$/);
-   if(m)values[m[1]]=m[2].replace(/^['"]|['"]$/g,'');
+   if(m){const v=m[2].replace(/^['"]|['"]$/g,'');if(v&&!values[m[1]])values[m[1]]=v;}
   }
  }
  return values;
@@ -40,6 +40,11 @@ export function actors(){
  return accounts;
 }
 export const client=account=>createClient({chain:studionet,endpoint:ENDPOINT,...(account?{account}:{})});
+export async function safeSdk(operation){
+ const error=console.error,warn=console.warn;
+ console.error=console.warn=()=>console.log(JSON.stringify({sdkDiagnostic:'REDACTED'}));
+ try{return await operation();}finally{console.error=error;console.warn=warn;}
+}
 export async function chainCheck(reader){
  if(studionet.id!==61999||Number(BigInt(await reader.request({method:'eth_chainId',params:[]})))!==61999)throw new Error('Wrong network identity');
 }

@@ -13,6 +13,8 @@ if($Only -eq 'lint'){exit 0}
 if($LASTEXITCODE -ne 0){exit $LASTEXITCODE}
 & node --test tests/receipts.test.mjs
 if($LASTEXITCODE -ne 0){exit $LASTEXITCODE}
+& node --test tests/value_receipts.test.mjs
+if($LASTEXITCODE -ne 0){exit $LASTEXITCODE}
 foreach($script in Get-ChildItem -LiteralPath scripts -Filter '*.mjs'){
  & node --check $script.FullName
  if($LASTEXITCODE -ne 0){exit $LASTEXITCODE}

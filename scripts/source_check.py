@@ -9,8 +9,14 @@ classes=[node for node in ast.parse(source).body if isinstance(node,ast.ClassDef
 assert len(classes)==1 and classes[0].name=='PartitionSeal'
 assert not any((root/name).exists() for name in ['frontend','app','src/app'])
 assert 'run_nondet_unsafe' not in source and 'strict_eq' not in source
+payable=[]
 for node in classes[0].body:
  if isinstance(node,ast.FunctionDef):
   decorators=[ast.unparse(d) for d in node.decorator_list]
-  assert 'gl.public.write.payable' not in decorators
-print('ASCII_HEADER_CLASS_NO_APP_OK: PartitionSeal, pinned Studionet v0.2.16, no value custody')
+  reads_value=any(isinstance(n,ast.Attribute) and ast.unparse(n)=='gl.message.value' for n in ast.walk(node))
+  if 'gl.public.write.payable' in decorators:payable.append(node.name)
+  if reads_value:assert 'gl.public.write.payable' in decorators
+assert payable==['assent']
+assert '@gl.evm.contract_interface' in source and '_Recipient(sender).emit_transfer(value=u256(amount))' in source
+assert 'gl.chain.Account' not in source
+print('ASCII_HEADER_CLASS_PAYABLE_EOA_NO_APP_OK: PartitionSeal, pinned Studionet v0.2.16, assent1GEN escrow')

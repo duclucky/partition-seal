@@ -1,5 +1,8 @@
 # Copy-ready Portal submission
 
+**SUPERSEDED V1 PACKET. Do not submit for V2.** Owner-requested escrow revision
+requires new deployment, real money lifecycle, updated counts/CI/description.
+
 **Title:** PartitionSeal - Conserved Semantic Permission Partition
 
 **Track / Category:** Builder / Intelligent Contracts

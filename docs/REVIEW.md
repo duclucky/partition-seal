@@ -1,5 +1,8 @@
 # Contract review and verification boundaries
 
+V2 payment review is in progress under PAYMENT-PLAN.md. V1 verdicts below are
+historical; they do not claim V2 native custody safety or real monetary execution.
+
 Reviewed against the Intelligent Contracts bar after implementation.
 
 - Meaning validator: independent source/prompt replay compares complete U0/U1

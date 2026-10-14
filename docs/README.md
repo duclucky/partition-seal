@@ -1,4 +1,10 @@
-# PartitionSeal specification
+# PartitionSeal specification: V2 payment amendment and historical V1
+
+Active V2 escrow specification: [PAYMENT-PLAN.md](PAYMENT-PLAN.md), approved by
+the owner before implementation. Its eight safety rows, value destinations and
+14 admission delta checks supersede V1's noncustodial/payment N/A claims below.
+V2 execution is PENDING until native payment/child receipt/balance proofs exist.
+The V1 text below is historical scope/semantic design, not V2 monetary evidence.
 
 ## Identity and product hook
 

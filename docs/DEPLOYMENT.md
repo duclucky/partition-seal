@@ -22,3 +22,8 @@ non-custodial primitive; no fake balances, fees or dust deposits are introduced.
 
 The primary lifecycle is tracked separately in lifecycle.json. Pending steps
 remain pending until receipts AND canonical ownership/consumption reads complete.
+# V2 migration status
+
+New escrow deployment/payment evidence PENDING. Any V1 Result: SUCCESS below
+proves only the historical noncustodial deployment; never V2 payment execution.
+

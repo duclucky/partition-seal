@@ -12,6 +12,13 @@ A = "May view the registered article privately with source credit; no sharing."
 B = "May make a paper copy for private study with source credit; no sharing."
 VALID = {"coverage": {"U0": "A", "U1": "B"}, "limits": {"A": "WITHIN", "B": "WITHIN"}, "reason": "Complete disjoint split."}
 
+def paid_assent(c,vm,pid,digest):
+    vm.value=10**18
+    try:
+        return c.assent(pid,digest)
+    finally:
+        vm.value=0
+
 def view(value):
     return json.loads(value)
 
@@ -42,7 +49,7 @@ def ready(c, vm, accounts):
     digest = view(c.get_proposal(pid))["digest"]
     for actor in accounts[1:3]:
         vm.sender = actor
-        c.assent(pid, digest)
+        paid_assent(c, vm, pid, digest)
     vm.sender = accounts[0]
     return pid
 
@@ -52,7 +59,7 @@ def mock(vm, result=None, status=200, version=True):
     vm.mock_llm(r".*", json.dumps(VALID if result is None else result))
 
 def snapshot(c, root, pid=None):
-    return [c.get_root(root), c.get_authority(root+":U0"), c.get_authority(root+":U1"), c.get_proposal(pid) if pid else None]
+    return [c.get_root(root), c.get_authority(root+":U0"), c.get_authority(root+":U1"), c.get_proposal(pid) if pid else None, c.get_accounting(), c.get_payment(pid) if pid else None]
 
 def test_root_creation_and_entity_isolation(contract, direct_vm, direct_accounts):
     root = create(contract, direct_vm, direct_accounts)
@@ -86,7 +93,7 @@ def test_hash_valid_unauthorized_assent_leaves_state_unchanged(contract, direct_
     direct_vm.sender = direct_accounts[wrong_actor]
     before = snapshot(contract, "root-one", pid)
     with pytest.raises(Exception, match="recipient"):
-        contract.assent(pid, digest)
+        paid_assent(contract, direct_vm, pid, digest)
     assert snapshot(contract, "root-one", pid) == before
 
 def test_wrong_digest_replay_and_missing_assent(contract, direct_vm, direct_accounts):
@@ -94,13 +101,13 @@ def test_wrong_digest_replay_and_missing_assent(contract, direct_vm, direct_acco
     direct_vm.sender = direct_accounts[1]
     before = snapshot(contract, "root-one", pid)
     with pytest.raises(Exception, match="digest"):
-        contract.assent(pid, "0"*64)
+        paid_assent(contract, direct_vm, pid, "0"*64)
     assert snapshot(contract, "root-one", pid) == before
     digest=view(contract.get_proposal(pid))["digest"]
-    contract.assent(pid,digest)
+    paid_assent(contract,direct_vm,pid,digest)
     before=snapshot(contract,"root-one",pid)
     with pytest.raises(Exception,match="assented"):
-        contract.assent(pid,digest)
+        paid_assent(contract,direct_vm,pid,digest)
     direct_vm.sender=direct_accounts[0]
     with pytest.raises(Exception,match="assent"):
         contract.review_partition(pid)
@@ -157,10 +164,13 @@ def test_deadline_stale_phase_rejects_without_mutation(contract,direct_vm,direct
     direct_vm.sender=direct_accounts[0 if method=="review_partition" else 1]
     before=snapshot(contract,"root-one",pid)
     args=[pid] if method=="review_partition" else [pid,view(contract.get_proposal(pid))["digest"]]
-    if delta<0:getattr(contract,method)(*args)
+    def invoke():
+        if method=="assent":return paid_assent(contract,direct_vm,*args)
+        return getattr(contract,method)(*args)
+    if delta<0:invoke()
     else:
         with pytest.raises(Exception,match="expired"):
-            getattr(contract,method)(*args)
+            invoke()
         assert snapshot(contract,"root-one",pid)==before
 
 @pytest.mark.parametrize("delta",[-1,0,1])
