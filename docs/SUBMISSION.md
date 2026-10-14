@@ -20,7 +20,7 @@ PartitionSeal conserves two exclusive internal permission units when their holde
 
 **Network:** owner-selected Studionet61999. No Studio Dev execution claimed.
 
-**CI:** PENDING_CURRENT_PUBLIC_CI
+**CI:** https://github.com/duclucky/partition-seal/actions/runs/38499665001 (completed/SUCCESS, current V3 source/tests/evidence).
 
 **Unchanged grader:**0BLOCKER,1 reviewed warning (private nonpayable rejection
 guard, not a receiving entrypoint); npm check/gltest PASS, GATE OK. Bot unchanged.

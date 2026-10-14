@@ -66,5 +66,7 @@ finality, exact sender/recipient/value/parent binding and balance deltas prove e
 restriction and complete zero-balance/liability cleanup before V3; no further funds sent.
 V1 evidence cannot prove payments; V2 evidence is not V3 proof.
 
-Current public CI and unchanged grading are being verified before the final packet.
+[Public V3 CI PASS](https://github.com/duclucky/partition-seal/actions/runs/38499665001).
+Unchanged grader:0BLOCKER,1 reviewed private-guard warning, dynamic checks PASS,
+GATE OK. See REVIEW.md for the exact warning and actual payable metadata proof.
 [Copy-ready Portal fields](docs/SUBMISSION.md); owner handles reCAPTCHA and Submit.

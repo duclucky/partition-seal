@@ -6,7 +6,8 @@ Active price1GEN per named recipient; complete settlement/refund/withdraw safety
 
 IDEA-042, partition-seal, Intelligent Contracts, V3 VERIFIED PAID EXECUTION. Owner requested **Studionet
 61999** for this deliverable. New independent contract-only repo.
-V3 exact source/schema and all five paid cases verified. Current public CI/grader are being checked.
+V3 exact source/schema and all five paid cases verified. Public CI38499665001 PASS;
+unchanged grader0BLOCKER/1reviewed warning, npmcheck/gltest PASS, GATE OK.
 
 Subdivide two exclusive protocol permission units without duplicating scope,
 dropping duties or allowing the original holder to exercise retired authority.
