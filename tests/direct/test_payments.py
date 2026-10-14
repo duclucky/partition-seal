@@ -167,3 +167,34 @@ def test_retry_then_valid_sale_credits_exactly_once_and_preserves_attempts(contr
     assert credit(contract,direct_accounts[0])=="2" and account(contract)["escrow_gen"]=="0"
     assert json.loads(contract.get_attempt(pid+":T1"))["outcome"]=="RETRYABLE"
     assert json.loads(contract.get_attempt(pid+":T2"))["outcome"]=="PARTITIONED"
+
+@pytest.mark.parametrize("method",["expire_proposal","close_root"])
+@pytest.mark.parametrize("delta",[-1,0,1])
+@pytest.mark.parametrize("buyer",[1,2])
+def test_paid_buyer_recovers_without_holder_at_exact_boundary(contract,direct_vm,direct_accounts,method,delta,buyer):
+    pid=purchase(contract,direct_vm,direct_accounts)
+    clock(direct_vm,(PROPOSAL_EXPIRY if method=="expire_proposal" else ROOT_EXPIRY)+delta)
+    direct_vm.sender=direct_accounts[buyer]
+    arg=pid if method=="expire_proposal" else "root-one"
+    before=money_snapshot(contract,direct_accounts,pid)
+    if delta<0:
+        with pytest.raises(Exception,match="premature"):getattr(contract,method)(arg)
+        assert money_snapshot(contract,direct_accounts,pid)==before
+    else:
+        getattr(contract,method)(arg)
+        assert credit(contract,direct_accounts[1])==credit(contract,direct_accounts[2])=="1"
+        assert account(contract)["escrow_gen"]=="0"
+        after=money_snapshot(contract,direct_accounts,pid)
+        with pytest.raises(Exception):getattr(contract,method)(arg)
+        assert money_snapshot(contract,direct_accounts,pid)==after
+
+@pytest.mark.parametrize("method",["expire_proposal","close_root"])
+def test_unpaid_recipient_cannot_recover_others_deposit(contract,direct_vm,direct_accounts,method):
+    pid=purchase(contract,direct_vm,direct_accounts,one=True)
+    clock(direct_vm,ROOT_EXPIRY);direct_vm.sender=direct_accounts[2]
+    before=money_snapshot(contract,direct_accounts,pid)
+    arg=pid if method=="expire_proposal" else "root-one"
+    with pytest.raises(Exception,match="holder|paid recipient"):getattr(contract,method)(arg)
+    assert money_snapshot(contract,direct_accounts,pid)==before
+    direct_vm.sender=direct_accounts[1];getattr(contract,method)(arg)
+    assert credit(contract,direct_accounts[1])=="1" and credit(contract,direct_accounts[2])=="0"

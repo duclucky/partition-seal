@@ -1,17 +1,12 @@
-# PartitionSeal specification: V2 payment amendment and historical V1
+# PartitionSeal V3 escrow specification
 
-Active V2 escrow specification: [PAYMENT-PLAN.md](PAYMENT-PLAN.md), approved by
-the owner before implementation. Its eight safety rows, value destinations and
-14 admission delta checks supersede V1's noncustodial/payment N/A claims below.
-V2 execution is PENDING until native payment/child receipt/balance proofs exist.
-The V1 text below is historical scope/semantic design, not V2 monetary evidence.
+Active price1GEN per named recipient; complete settlement/refund/withdraw safety policy in [PAYMENT-PLAN.md](PAYMENT-PLAN.md). V3 real paid execution is PENDING until all recorded cases finish. V1 evidence is historical in evidence/studionet/archive/partition-seal-v1.json.
 
 ## Identity and product hook
 
-IDEA-042, partition-seal, Intelligent Contracts, VERIFIED. Owner requested **Studionet
+IDEA-042, partition-seal, Intelligent Contracts, V3 PAYMENTS IN EXECUTION. Owner requested **Studionet
 61999** for this deliverable. New independent contract-only repo.
-Product deployment and primary/recovery lifecycle verified; public CI passed at
-https://github.com/duclucky/partition-seal/actions/runs/38449244452.
+V3 exact source/schema deployed successfully; current payment/CI proof remains pending.
 
 Subdivide two exclusive protocol permission units without duplicating scope,
 dropping duties or allowing the original holder to exercise retired authority.
@@ -46,19 +41,19 @@ overlapping or expanded scopes. Hashes authenticate bytes, not semantic coverage
 | Contract count | PASS_ADMISSION | One actual authority state owner, no mirroring guard |
 | Differentiation | PASS_ADMISSION | Exhaustive/disjoint subdivision and root retirement differs from attenuation/cancellation/merge |
 | Claim-to-code | PASS_ADMISSION | Complete mapping below with primary/recovery canonical network evidence |
-| Full lifecycle | PASS_ADMISSION; PASS_EXECUTION | Finalized assent/review/ownership/both consumption and timed expiry/close, canonical reads in evidence/studionet |
-| Scope honesty | PASS_ADMISSION | No external property, legal title, copyright, execution, money or adoption claim |
+| Full lifecycle | PASS_ADMISSION; PENDING_EXECUTION_V3 | Paid sale/refund/close/withdraw requires exact native/recipient deltas and finalized child proofs |
+| Scope honesty | PASS_ADMISSION | No external property, legal title, copyright, execution, external delivery or adoption claim |
 
 ## Actors / scope and non-goals
 
 Original holder authors and owns two internal units, proposes and reviews subdivision,
-and owns timed recovery. Recipient A/B must be distinct from each other and holder;
+and can request timed recovery. Paid recipients independently recover after expiry if the holder disappears. Recipient A/B must be distinct from each other and holder;
 each assents exact stored proposal, then only current owner can consume a unit.
 Integrator reads FINALIZED canonical state; pending/simulated outcomes are advisory.
 
 Exactly two operation units, one-level split, bounded attempts. No external issuer
 receipt, tool execution, copyright, law, physical identity, wallet simulation or
-cross-chain rights. No native GEN custody. No app/frontend/Vercel.
+cross-chain rights. Payable assent locks1GEN each; holder/refund credits and own-wallet withdrawals. No app/frontend/Vercel.
 
 ## Product/frontend blueprint and frontend lifecycle matrix
 
@@ -70,7 +65,8 @@ Scripts and canonical views prove integration. No browser workflow claim.
 
 Root ID: 1-48 ASCII alphanumeric/underscore/hyphen. Immutable unit IDs root:U0/root:U1.
 Proposal root:P<n>; attempt proposal:T<n>. Fully typed decorated dataclasses in
-TreeMap[str,Root/Unit/Proposal/Attempt]; bigint counters/time. No JSON canonical storage.
+TreeMap[str,Root/Unit/Proposal/Attempt] plus TreeMap[str,bigint] wallet credits;
+bigint counters/time/escrow/accounting totals. No JSON canonical storage.
 Explicit constructor; collections are class annotations, never reassigned.
 
 ACTIVE root: original holder owns both U0/U1; a used unit permanently prohibits
@@ -94,13 +90,15 @@ requires original holder and now>=its exact deadline. Phase does not replace clo
 
 | Method | Caller | Allowed states | Forbidden states | Temporal/expiry gate | Idempotency | Value/accounting effect | Views affected | Negative tests |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| create_root | Authenticated creator | New valid ID | Existing/malformed ID, empty text/target | now+60<=expiry<=now+86400 | Duplicate rejects | No GEN; exactly two units | root/authority | duplicate, bad inputs and both expiry bounds; non-payable |
-| propose_partition | Original holder | ACTIVE, both unused | FROZEN/SPLIT/CLOSED/any used unit | now<root expiry; now+30<=deadline<root expiry | Monotonic proposal ID, no edits | No GEN; freeze, no ownership change | root/proposal/authority | wrong caller/state, partial use, bad recipients, late/equality |
-| assent | Exact A/B recipient | FROZEN/READY, own flag false | Wrong actor/digest, retryable/terminal, duplicate | now<proposal deadline and root expiry | Duplicate rejects | No GEN; does not grant authority | root/proposal | correct-digest outsider, wrong digest, replay, boundary-1/equal/+1 stale phase |
-| review_partition | Original holder | READY/RETRYABLE, both assents, attempts<3 | Wrong role, missing assent, terminal, used root | now<proposal deadline and root expiry | Append attempt, terminal duplicate rejects | No GEN; only complete valid partition assigns same unit IDs | root/proposal/attempt/authority | wrong role/state/closed; malicious complete-shape meaning; extra/missing IDs/enums; no mutation on rejection |
-| consume | Current unit owner | ACTIVE/SPLIT, unused unit | FROZEN/CLOSED, old owner after split, duplicate | now<root expiry | Duplicate rejects | No GEN; monotonic one-time unit use | root/authority | wrong owner, frozen, duplicate, closed, expiry-1/equal/+1 |
-| expire_proposal | Original holder | FROZEN/READY/RETRYABLE | Wrong role, terminal, unknown | now>=proposal deadline | Duplicate rejects | No GEN; preserve owners/use, release freeze only | root/proposal/authority | premature/wrong role/duplicate/finalized, -1/equal/+1 stale phase |
-| close_root | Original holder | Expired ACTIVE/FROZEN/SPLIT | Wrong caller, CLOSED, unknown | now>=root expiry | Duplicate rejects | No GEN; authority inactive, consumed units never resurrect | root/proposal/authority | premature/wrong caller/duplicate, pending interests, expiry boundaries |
+| create_root | Authenticated creator | Fresh valid ID | Existing/invalid/empty | now+60<=expiry<=now+86400 | Duplicate rejects | Exactly0GEN; two units | root/authority/accounting | value attached/invalid bound/duplicate no mutation |
+| propose_partition | Original holder | ACTIVE unused root | Used/FROZEN/SPLIT/CLOSED | now<root expiry; now+30<=deadline<expiry | Monotonic immutable proposal | 0GEN; zero initial escrow | root/proposal/payment | wrong role/state/time/recipient/nonzero value |
+| assent payable | Exact named A/B | FROZEN/READY own flag false | Wrong actor/digest/replayed/terminal | now<proposal deadline AND root expiry | One paid assent each | Exactly1GEN -> escrow and received total | proposal/payment/accounting | 0/wrong value, valid digest wrong origin, replay/version/expiry; liability unchanged on rejection |
+| review_partition | Original holder | READY/RETRYABLE both paid, attempts<3 | Missing payment/terminal/used/wrong role | now<both deadlines | Append attempts; terminal rejects | 0GEN; PARTITIONED holdercredit2, REJECTED paidbuyercredit1each, RETRYABLE none | attempt/root/authority/payment/credit/accounting | semantic invariant invalid before money, wrong role/state/time, no double allocation |
+| consume | Exact current unit owner | ACTIVE/SPLIT unused | Frozen/used/closed/wrong owner | now<root expiry | Once | 0GEN, sale money unchanged | authority/accounting | nonzero value/role/state/time/duplicate |
+| expire_proposal | Original holder or exact paid recipient | FROZEN/READY/RETRYABLE | Terminal/unknown/unpaid party/outsider | now>=proposal deadline | Pending allocation once; duplicate rejects | Paidflags refund to their own credits; zero escrow | root/proposal/payment/credit/accounting | premature/unauthorized/finalized/duplicate; paid buyer recovers without holder; partial deposit not orphaned |
+| close_root | Original holder; paid recipient only for pending FROZEN root | Expired ACTIVE/FROZEN/SPLIT | Unknown/CLOSED/unpaid party/outsider | now>=root expiry | Closure once | Pending funds refund; sold/refunded payment unchanged | root/proposal/payment/credit/accounting | premature/duplicate/closed/wrong role; buyer recovery of pending/partial/retry; no double credit |
+| withdraw | Positive credit owner only | Positive own wallet credit | Zero own credit/attached value | N/A: due credits never time-forfeit, no dependency on root phase | Debit once; duplicate zero rejects | Credit->withdrawn then same EOA finalized EthSend | credit/accounting + native/recipient balance/child receipt | stranger/duplicate/nonzero value, closed root still payable, exact message binding/debit/invariant |
+
 
 ## Evidence policy and authority matrix
 
@@ -121,6 +119,7 @@ change, followed by retry or timed recovery. Quoted artifacts are data, never in
 | Split authorized | Exact A/B text/recipient/deadline | Original holder | Owner-checked propose transaction | ACTIVE unused root, unique proposal, valid distinct addresses/time | Root/proposal/target/recipient/digest bindings | One active proposal; monotonic counter, expiry | Child meaning relative to root | Revert unchanged | No retirement/assignment | Outsider with valid digest; wrong parent; used-root; late proposal |
 | Exact recipients assented | Digest and flags | A/B wallets | Signed transaction sender and role | Recomputed canonical digest equal, sender A/B, unused flag | Root/proposal/version/text/actor/expiry | One each, no editing/replay, deadline | Eligibility only, no model authentication | Revert unchanged | No READY review or reassignment | Correct-digest wrong caller; wrong digest/version; replay/stale/future-bound; prose redefining authority |
 | Policy context available | Fixed dated W3C | W3C | Validator-side authoritative HTTPS fetch | Status/size/version/markers | Fixed source/v1 rubric; internal authority separately canonical | Dated version, each independent attempt | Context only, not ownership/performance proof | RETRYABLE | No parent retirement or child authority | Wrong-version/malformed/outage; arbitrary URL/artifact not accepted; injection no ID/owner widening |
+| 1GEN paid for this exact proposal by this recipient | Actual signed transaction origin/value, immutable paid flag and escrow | Named wallet signs; runtime records value | GenVM transaction context and canonical proposal state | Sender named A/B; actual value exactly1GEN; digest recomputed; unused paid flag; complete escrow flags before review | Network61999/contract/revision/root/proposal/target/recipients/source/price/deadlines in locked digest | Unique immutable proposal, one payment each, now<both bounds; version-bound | Only scope judgment after deterministic eligibility; model cannot authenticate payment or supply payouts | Revert unchanged invalid auth/value/binding; RETRYABLE source/model ambiguity | No authority, seller credit, refund to outsider or transfer | Correct-digest wrong-origin/amount; replay/stale/version/target/malicious amount fields cannot alter escrow/credits/settlement |
 
 ## Consensus design
 
@@ -139,20 +138,47 @@ not a settlement. Native UNDETERMINED leaves no finalized fake attempt; diagnose
 
 ## Consequence, accounting and value destinations
 
-PARTITIONED retires original holder, assigns conserved units to fixed recipients;
-REJECTED restores original unused authority; RETRYABLE preserves frozen owners/use;
-EXPIRED releases freeze if live; CLOSED disables all remaining rights.
-Application value: **N/A**. No payable/deposit/bond/purse/credit/transfer/withdrawal method,
-no stranded GEN liability or arbitrary fake reward. Protocol fees are outside contract
-custody. Human-facing amounts use GEN. Every native-asset flow/remainder/transfer-proof
-row is N/A because the primitive does not receive/move native assets.
-Enforce exactly the same U0/U1 IDs, one owner each, consumed flags monotonic. Internal
-authority consumption does not prove actual tool execution. Integrators wait finality.
+Each named recipient pays exactly **1 GEN** via payable `assent`. Root issuer is
+the seller of INTERNAL protocol rights only. Two assents lock **2 GEN**.
+Price, revision, canonical source, actors, root/proposal IDs and timestamps are
+included in the immutable/recomputed proposal digest. No model chooses amounts
+or recipients. Sender and actual `gl.message.value` authenticate origin/payment.
+
+- PARTITIONED: same conserved units assigned once; 2 GEN escrow becomes holder
+  credit once. No reversal after successful sale/consumption/root expiry.
+- REJECTED: each paid recipient receives their 1 GEN credit; root ownership stays.
+- RETRYABLE: escrow remains locked, no seller or recipient credit; at most3 attempts.
+- expire_proposal: original holder or exact paid recipient, now>=deadline, pending state; credits each
+  paid recipient, including single-assent proposals. Root ACTIVE if still live,
+  otherwise CLOSED. Exactly-once settlement; late/repeated calls never duplicate credit.
+- close_root: holder or pending paid recipient, now>=root expiry; pending proposal refunds all paid amounts,
+  then closes. Already PARTITIONED/REJECTED/EXPIRED money is never settled again.
+- withdraw: caller may withdraw only their complete positive credit to that same
+  authenticated address. Debit before finalized-only EVM-interface emission.
+  Credit is collectible even after root closure: no clock-based forfeiture.
+
+Typed bigint received/withdrawn/escrow/credit totals and str-keyed credit map.
+Invariant: received = withdrawn + escrow + credit; each term nonnegative.
+Proposal escrow equals 1 GEN times authenticated paid flags while LOCKED, zero
+after one-time allocation. Native balance equality is verified after transfer
+finality; a parent success/internal debit alone never proves external payment.
+Nonpayable writes explicitly reject nonzero value and retain SDK metadata.
+
+## Value-destination matrix
+
+| Value item | Payer/source | Locked state | Release destination | Refund destination | Forfeit destination | Terminal states covered | Duplicate/late/retry behavior | Canonical proof view |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| A purchase1GEN | Named A signed payable assent | Proposal LOCKED | Original holder credit only after PARTITIONED | A credit on REJECTED/expired/pending-root-close | None | PARTITIONED/REJECTED/EXPIRED/CLOSED | Duplicate/late reject; RETRYABLE locks until valid review/expiry/close | get_payment/get_credit/get_accounting |
+| B purchase1GEN | Named B signed payable assent | Proposal LOCKED | Same holder credit only after PARTITIONED | B credit on REJECTED/expired/pending-root-close | None | Same plus B never-assented0 liability | No collection from absent B; no double-credit | Same views |
+| Seller credit2GEN | Both validated payments | Credit ledger | Same original holder EOA | N/A: complete valid protocol sale, no clawback | None | PARTITIONED/SPLIT/CLOSED | Later close cannot refund sold rights; withdraw once | get_credit/get_accounting/native balance/EOA balance/child receipt |
+| Buyer refund1GEN | Exact paid amount | Credit ledger | Same paid A/B EOA via withdraw | Original authenticated payer only | None | REJECTED/EXPIRED/CLOSED | Remains collectible without expiry; no arbitrary destination | Same canonical credit/accounting and exact contract/recipient delta |
+| Never-assented party | No value received | N/A zero | None | None | None | Partial assent/expiry/close | Cannot earn unbacked credit | get_payment paid flags/escrow |
+
 
 ## Reusable interface, consumer boundary and adoption
 
 Writes: create_root, propose_partition, assent, review_partition, consume,
-expire_proposal, close_root. Views: get_root/get_proposal/get_attempt/get_authority/get_policy.
+expire_proposal, close_root, withdraw. Views: get_root/get_proposal/get_attempt/get_authority/get_policy/get_payment/get_credit/get_accounting.
 LangGraph broker checks finalized authority and holder-signed consume; DAOhaus department
 router calls propose/assent/review; A2A gateway reads exact current owner and usage.
 No callback/consumer contract, adoption or external gateway enforcement claimed.
@@ -174,12 +200,15 @@ and normalized finalized SUCCESS/ERROR. Direct mode is local evidence, not netwo
 
 | Claim | Contract method/state | View/read | Test | Network evidence |
 | --- | --- | --- | --- | --- |
-| Two isolated immutable units | create_root/units | root/authority | creation/isolation | lifecycle.json create/root and independent recovery.json root |
-| Exact bilateral origin assent | propose/assent/flags | proposal | origin_digest_replay | lifecycle.json both assent receipts/proposal flags |
-| Independent meaning consensus | review/Attempt | attempt | semantic_replay/invariants | consensus.json NORMAL, majority and canonical attempt |
-| Conserved ownership/root retirement | review/SPLIT | root/authority | no_duplicate_authority | lifecycle.json SPLIT root/new owner reads |
-| One-time exact-owner exercise | consume/consumed | authority | frozen/wrong_owner/duplicate | lifecycle.json both finalized consumed units |
-| Timed recovery | expire/close | root/proposal | stale_phase_boundary_recovery | recovery.json restored root, expired proposal, closed root |
+| Two isolated immutable units | create_root/units | root/authority | creation/isolation | payments.json sale and independent recovery roots |
+| Exact bilateral paid origin assent | propose/assent/flags/value | proposal/payment/accounting | origin_digest_replay/wrong_value | payments.json sale deposits/flags/exact contract increases |
+| Independent meaning consensus | review/Attempt | attempt | semantic_replay/invariants | payments.json sale/rejected actual dynamic attempt and SUCCESS |
+| Conserved ownership/root retirement | review/SPLIT | root/authority | no_duplicate_authority | payments.json sale root/owners |
+| One-time exact-owner exercise | consume/consumed | authority | frozen/wrong_owner/duplicate | payments.json sale both consumed |
+| Timed recovery | expire/close | root/proposal/payment | stale_phase_boundary_recovery/paid_recovery | payments.json smoke/expiry/close |
+| Exact holder sale credit | review/_release/credits | credit/payment/accounting | valid_partition/sale_once | payments.json sale beforeWithdraw credits2GEN |
+| Payer-specific refunds | review/expire/close/_release | credit/payment/accounting | rejection/partial/retry/close | payments.json rejected/smoke/expiry/close |
+| Authenticated own-wallet withdrawal | withdraw/EVM interface | credit/accounting + native balance | evm_boundary/no_double/outsider | payments.json all withdraw child receipts and exact contract/recipient deltas |
 
 ## Analogue/differentiation
 
@@ -195,20 +224,22 @@ four fingerprint dimensions. Shared canonical evidence does not imply shared mec
 
 Python3.12 child .venv, exact pinned legacy runner/API/tools, GENVM_VERSION=v0.2.16.
 Lint/semantic validation, all direct/tooling tests and npm run check. Existing three
-authorized wallets only; no faucet/funding/key generation. Exact-source deploy then
+authorized wallets only; owner-approved2GEN funding to existing A, no faucet or
+key generation. Exact-source deploy then
 schema smoke, complete split/consumption and recovery lifecycle with canonical reads,
 safe receipts and validator agreement. Scripts persist pending hash before wait and
 resume from actual state; bind network/source commit/hash/version. Evidence only under
 docs/evidence/studionet; generic diagnostic not counted as product contract.
 Public allowlist/hygiene, meaningful Git history, repo/CI/Explorer verification,
 unchanged grading bot NO BLOCKER, complete copy-ready <1000-char Portal fields and final
-master reread. Owner submits. Primary partition/both consumption and timed recovery/
-close are verified. Other semantic classes and negative boundary branches are
-local-test evidence only. No production gateway execution claimed.
+master reread. Owner submits. Paid partition/refund/expiry/close/withdraw proof
+is PENDING until every payments.json case completes. Invalid auth/output, source
+outage and other negative boundary branches are local-test evidence only.
+No production gateway execution claimed.
 
 ## Honest limits / kill criteria
 
-No external property, law, copyright, actual execution, custody, app, adoption or
+No external property, law, copyright, actual gateway execution, app, adoption or
 legal validity. Exactly two units, one-level split, fixed recipients, bounded3 attempts.
 Reject/redesign if deterministic code replaces semantic necessity; actor artifacts
 grant authority without origin binding; any unit duplicates/orphans; stale phase bypasses

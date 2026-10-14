@@ -7,7 +7,7 @@ import hashlib
 import json
 
 SOURCE_URL = "https://www.w3.org/TR/2018/REC-odrl-model-20180215/"
-REVISION = "PARTITION_SEAL_V2_ESCROW"
+REVISION = "PARTITION_SEAL_V3_ESCROW"
 GEN = 10**18
 
 
@@ -195,6 +195,12 @@ class PartitionSeal(gl.Contract):
     def _holder(self, root):
         if gl.message.sender_address != root.holder:
             raise gl.vm.UserError("original holder required")
+
+    def _recoverer(self, root, proposal):
+        sender = gl.message.sender_address
+        if sender == root.holder or (proposal.assent_a and sender == proposal.recipient_a) or (proposal.assent_b and sender == proposal.recipient_b):
+            return
+        raise gl.vm.UserError("original holder or paid recipient required")
 
     def _live(self, root):
         if _now() >= root.expiry:
@@ -408,7 +414,7 @@ class PartitionSeal(gl.Contract):
         _no_value()
         p = self._proposal(proposal_id)
         root = self._root(p.root_id)
-        self._holder(root)
+        self._recoverer(root, p)
         if _now() < p.deadline:
             raise gl.vm.UserError("premature expiry")
         if root.status != "FROZEN" or root.proposal_id != proposal_id or p.status not in ("FROZEN", "READY", "RETRYABLE"):
@@ -423,7 +429,10 @@ class PartitionSeal(gl.Contract):
     def close_root(self, root_id: str) -> None:
         _no_value()
         root = self._root(root_id)
-        self._holder(root)
+        if root.status == "FROZEN":
+            self._recoverer(root, self._proposal(root.proposal_id))
+        else:
+            self._holder(root)
         if _now() < root.expiry:
             raise gl.vm.UserError("premature root close")
         if root.status == "CLOSED":

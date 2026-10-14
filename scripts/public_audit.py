@@ -9,8 +9,8 @@ def git(*args):
 
 top=Path(git('rev-parse','--show-toplevel')[0]).resolve()
 assert top==ROOT and (ROOT.parent/'.git').exists() is False
-paths=set(git('ls-files'))|set(git('diff','--cached','--name-only'))
-allowed=re.compile(r'^(?:\.gitignore|\.gitattributes|\.env\.example|\.github/workflows/check\.yml|README\.md|requirements-dev\.txt|package(?:-lock)?\.json|gltest\.config\.yaml|contracts/partition_seal\.py|scripts/[a-z_]+\.(?:py|mjs|ps1)|tests/(?:direct/[a-z_]+\.py|[a-z_]+\.test\.mjs)|docs/(?:[A-Z_-]+\.md|SUBMISSION-DESCRIPTION\.txt|evidence/studionet/(?:[a-z_-]+\.json|archive/partition-seal-v1\.json)))$')
+paths=set(git('ls-files'))|set(git('diff','--cached','--name-only','--diff-filter=ACMR'))
+allowed=re.compile(r'^(?:\.gitignore|\.gitattributes|\.env\.example|\.github/workflows/check\.yml|README\.md|requirements-dev\.txt|package(?:-lock)?\.json|gltest\.config\.yaml|contracts/partition_seal\.py|scripts/[a-z_]+\.(?:py|mjs|ps1)|tests/(?:direct/[a-z_]+\.py|[a-z_]+\.test\.mjs)|docs/(?:[A-Z_-]+\.md|SUBMISSION-DESCRIPTION\.txt|evidence/studionet/(?:[a-z_-]+\.json|archive/partition-seal-v[12]\.json)))$')
 bad=[p for p in paths if not allowed.fullmatch(p)]
 assert not bad,'Public allowlist mismatch; inspect locally'
 historical=git('log','--all','--name-only','--format=')

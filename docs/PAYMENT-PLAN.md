@@ -1,9 +1,16 @@
-# Escrow revision V2: approved payment behavior and execution plan
+# Escrow revision V3: approved payment behavior and execution plan
 
 Owner approved adding escrow and real 1-2 GEN tests on Studionet61999.
 V1 noncustodial tests/evidence remain historical; they prove no payment flow.
 Status: PASS_ADMISSION for the design below; PENDING_EXECUTION for V2.
 No app, second application contract, runner migration or changed semantic rubric.
+V2 monetary smoke/sale/rejection worked, but review found holder-only recovery
+could strand a buyer's deposit if the holder disappears. V2 is superseded after
+all funds/credits are recovered. V3 permits original holder OR any named recipient
+whose paid assent is recorded to recover a pending proposal after its deadline,
+or close a pending root after its expiry. An unpaid recipient/outsider cannot.
+This is necessary to enforce the approved refund/no-orphan policy; money always
+returns to actual payers, never to the actor who happened to call recovery.
 
 ## Locked money and state policy
 
@@ -17,10 +24,10 @@ or recipients. Sender and actual `gl.message.value` authenticate origin/payment.
   credit once. No reversal after successful sale/consumption/root expiry.
 - REJECTED: each paid recipient receives their 1 GEN credit; root ownership stays.
 - RETRYABLE: escrow remains locked, no seller or recipient credit; at most3 attempts.
-- expire_proposal: original holder, now>=deadline, pending state; credits each
+- expire_proposal: original holder or paid recipient, now>=deadline, pending state; credits each
   paid recipient, including single-assent proposals. Root ACTIVE if still live,
   otherwise CLOSED. Exactly-once settlement; late/repeated calls never duplicate credit.
-- close_root: holder, now>=root expiry; pending proposal refunds all paid amounts,
+- close_root: holder or pending paid recipient, now>=root expiry; pending proposal refunds all paid amounts,
   then closes. Already PARTITIONED/REJECTED/EXPIRED money is never settled again.
 - withdraw: caller may withdraw only their complete positive credit to that same
   authenticated address. Debit before finalized-only EVM-interface emission.
@@ -52,8 +59,8 @@ Nonpayable writes explicitly reject nonzero value and retain SDK metadata.
 | assent payable | Exact named A/B | FROZEN/READY own flag false | Wrong actor/digest/replayed/terminal | now<proposal deadline AND root expiry | One paid assent each | Exactly1GEN -> escrow and received total | proposal/payment/accounting | 0/wrong value, valid digest wrong origin, replay/version/expiry; liability unchanged on rejection |
 | review_partition | Original holder | READY/RETRYABLE both paid, attempts<3 | Missing payment/terminal/used/wrong role | now<both deadlines | Append attempts; terminal rejects | 0GEN; PARTITIONED holdercredit2, REJECTED paidbuyercredit1each, RETRYABLE none | attempt/root/authority/payment/credit/accounting | semantic invariant invalid before money, wrong role/state/time, no double allocation |
 | consume | Exact current unit owner | ACTIVE/SPLIT unused | Frozen/used/closed/wrong owner | now<root expiry | Once | 0GEN, sale money unchanged | authority/accounting | nonzero value/role/state/time/duplicate |
-| expire_proposal | Original holder | FROZEN/READY/RETRYABLE | Terminal/unknown/wrong role | now>=proposal deadline | Pending allocation once; duplicate rejects | Paidflags refund to their own credits; zero escrow | root/proposal/payment/credit/accounting | premature/unauthorized/finalized/duplicate; partial deposit not orphaned |
-| close_root | Original holder | Expired ACTIVE/FROZEN/SPLIT | Unknown/CLOSED/wrong role | now>=root expiry | Closure once | Pending funds refund; sold/refunded payment unchanged | root/proposal/payment/credit/accounting | premature/duplicate/closed/wrong role; pending/partial/retry and no double credit |
+| expire_proposal | Original holder or exact paid recipient | FROZEN/READY/RETRYABLE | Terminal/unknown/unpaid party/outsider | now>=proposal deadline | Pending allocation once; duplicate rejects | Paidflags refund to their own credits; zero escrow | root/proposal/payment/credit/accounting | premature/unauthorized/finalized/duplicate; paid buyer recovers without holder; partial deposit not orphaned |
+| close_root | Original holder; paid recipient only for pending FROZEN root | Expired ACTIVE/FROZEN/SPLIT | Unknown/CLOSED/unpaid party/outsider | now>=root expiry | Closure once | Pending funds refund; sold/refunded payment unchanged | root/proposal/payment/credit/accounting | premature/duplicate/closed/wrong role; buyer recovery of pending/partial/retry; no double credit |
 | withdraw | Positive credit owner only | Positive own wallet credit | Zero own credit/attached value | N/A: due credits never time-forfeit, no dependency on root phase | Debit once; duplicate zero rejects | Credit->withdrawn then same EOA finalized EthSend | credit/accounting + native/recipient balance/child receipt | stranger/duplicate/nonzero value, closed root still payable, exact message binding/debit/invariant |
 
 ## Evidence authority delta

@@ -148,6 +148,9 @@ def test_source_failure_is_retryable_not_consequence(contract,direct_vm,direct_a
     assert view(contract.get_proposal(pid))["status"]=="RETRYABLE"
     assert view(contract.get_authority("root-one:U0"))["owner"].lower()==addr(direct_accounts[0]).lower()
     assert view(contract.get_authority("root-one:U0"))["consumed"] is False
+    assert view(contract.get_payment(pid))["escrow_gen"]=="2"
+    assert view(contract.get_payment(pid))["status"]=="LOCKED"
+    assert view(contract.get_accounting())["credit_gen"]=="0"
 
 def test_meaning_replay_ignores_rationale_but_rejects_opposite(contract,direct_vm,direct_accounts):
     pid=ready(contract,direct_vm,direct_accounts);mock(direct_vm)

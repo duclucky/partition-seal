@@ -9,7 +9,7 @@ const A='May view the registered article privately with source credit; no sharin
 const B='May make a paper copy of the registered article for private study with source credit; no sharing.';
 export async function runPayments(mode='all'){
  const deployment=jsonFile('deployment.json'),reader=client();await chainCheck(reader);
- if(deployment?.contractRevision!=='PARTITION_SEAL_V2_ESCROW'||deployment.executionResult!=='SUCCESS')throw new Error('Verified V2 escrow deployment required');
+ if(deployment?.contractRevision!=='PARTITION_SEAL_V3_ESCROW'||deployment.executionResult!=='SUCCESS')throw new Error('Verified V3 escrow deployment required');
  const address=deployment.contractAddress;
  const code=await reader.getContractCode(address);
  if(createHash('sha256').update(code).digest('hex')!==deployment.sourceSHA256)throw new Error('Deployed source mismatch');
@@ -17,8 +17,8 @@ export async function runPayments(mode='all'){
  let record=jsonFile('payments.json')??{network:'studionet',chainId:61999,contractAddress:address,sourceCommit:deployment.sourceCommit,sourceSHA256:deployment.sourceSHA256,cases:{}};
  if(record.contractAddress!==address)throw new Error('Payment run deployment mismatch');
  const persist=()=>save('payments.json',record);
- const balance=async owner=>BigInt(await reader.request({method:'eth_getBalance',params:[owner,'latest']}));
- const rawTx=hash=>reader.request({method:'eth_getTransactionByHash',params:[hash]});
+ const balance=async owner=>BigInt(await safeSdk(()=>reader.request({method:'eth_getBalance',params:[owner,'latest']})));
+ const rawTx=hash=>safeSdk(()=>reader.request({method:'eth_getTransactionByHash',params:[hash]}));
  async function waitRaw(hash){
   for(let tries=0;tries<100;tries++){
    const raw=await rawTx(hash);
@@ -111,16 +111,24 @@ export async function runPayments(mode='all'){
   if(c?.complete){console.log(JSON.stringify({case:name,alreadyVerified:true}));return;}
   if(!c){c={name,kind,rootId:'paid-'+name+'-'+deployment.sourceSHA256.slice(0,8),rootExpiry:Math.floor(Date.now()/1000)+(kind==='close'?300:7200),steps:{}};record.cases[name]=c;persist();}
   await step(c,'create',0,'create_root',[c.rootId,'article',U0,U1,c.rootExpiry]);
-  if(!c.deadline){c.deadline=Math.floor(Date.now()/1000)+(['smoke','expiry'].includes(kind)?120:kind==='close'?120:3600);persist();}
+  if(!c.deadline){c.deadline=Math.floor(Date.now()/1000)+(['smoke','expiry'].includes(kind)?180:kind==='close'?120:3600);persist();}
   await step(c,'propose',0,'propose_partition',[c.rootId,accounts[1].address,A,accounts[2].address,kind==='rejected'?A:B,c.deadline]);
-  const root=await read(reader,address,'get_root',[c.rootId]);c.proposalId=root.proposal_id;persist();
-  const proposal=await read(reader,address,'get_proposal',[c.proposalId]);
+  let root=await read(reader,address,'get_root',[c.rootId]);c.proposalId=root.proposal_id;persist();
+  let proposal=await read(reader,address,'get_proposal',[c.proposalId]);
+  if(!c.steps.assentA?.transactionHash&&Math.floor(Date.now()/1000)>=proposal.deadline){
+   if(root.status!=='FROZEN'||proposal.assent_a||proposal.assent_b)throw new Error('Expired proposal has commitments; use refund recovery instead of reproposing');
+   await step(c,'recoverUnpaidExpired',0,'expire_proposal',[c.proposalId]);
+   if(!c.replacementDeadline){c.replacementDeadline=Math.floor(Date.now()/1000)+180;persist();}
+   await step(c,'replaceUnpaidExpired',0,'propose_partition',[c.rootId,accounts[1].address,A,accounts[2].address,B,c.replacementDeadline]);
+   root=await read(reader,address,'get_root',[c.rootId]);c.proposalId=root.proposal_id;c.deadline=c.replacementDeadline;persist();
+   proposal=await read(reader,address,'get_proposal',[c.proposalId]);
+  }
   await step(c,'assentA',1,'assent',[c.proposalId,proposal.digest],'1');
   if(!['smoke','close'].includes(kind))await step(c,'assentB',2,'assent',[c.proposalId,proposal.digest],'1');
   if(['smoke','expiry'].includes(kind)){
-   await waitUntil(c.deadline,c);await step(c,'expire',0,'expire_proposal',[c.proposalId]);
+   await waitUntil(c.deadline,c);await step(c,'expire',1,'expire_proposal',[c.proposalId]);
   }else if(kind==='close'){
-   await waitUntil(c.rootExpiry,c);await step(c,'close',0,'close_root',[c.rootId]);
+   await waitUntil(c.rootExpiry,c);await step(c,'close',1,'close_root',[c.rootId]);
   }else{
    await step(c,'review',0,'review_partition',[c.proposalId]);
    const p=await read(reader,address,'get_proposal',[c.proposalId]);

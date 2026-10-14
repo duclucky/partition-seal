@@ -49,11 +49,19 @@ export async function chainCheck(reader){
  if(studionet.id!==61999||Number(BigInt(await reader.request({method:'eth_chainId',params:[]})))!==61999)throw new Error('Wrong network identity');
 }
 export async function finalized(reader,hash){
- const receipt=await reader.waitForTransactionReceipt({hash,status:TransactionStatus.FINALIZED,interval:4000,retries:100});
- return assertSuccessful(summarizeReceipt(receipt,hash));
+ for(let attempt=1;attempt<=3;attempt++){
+  try{
+   const receipt=await safeSdk(()=>reader.waitForTransactionReceipt({hash,status:TransactionStatus.FINALIZED,interval:4000,retries:100}));
+   return assertSuccessful(summarizeReceipt(receipt,hash));
+  }catch(e){
+   if(attempt===3||!(e instanceof SyntaxError)&&!String(e?.message??'').includes('Unexpected token'))throw e;
+   console.log(JSON.stringify({receiptPollTransient:true,attempt,transactionHash:hash}));
+   await new Promise(resolve=>setTimeout(resolve,2000));
+  }
+ }
 }
 export async function read(reader,address,functionName,args=[]){
- const value=await reader.readContract({address,functionName,args,stateStatus:'finalized'});
+ const value=await safeSdk(()=>reader.readContract({address,functionName,args,stateStatus:'finalized'}));
  return typeof value==='string'?JSON.parse(value):value;
 }
 export function reportError(e){
