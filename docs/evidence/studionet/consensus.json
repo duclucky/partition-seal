@@ -1,0 +1,50 @@
+{
+  "network": "studionet",
+  "chainId": 61999,
+  "sourceCommit": "88663f2ef7674444aeb6ab9dde06fab84b30c65a",
+  "contractAddress": "0xF6027BFEd18Fc5e50c1E6f56f015bbB5826F7EAD",
+  "transactionHash": "0xd7e928fa1ba94e13cb9650bb46a358233960bb0c1cdfefaf92c666f5d1af029f",
+  "status": "FINALIZED",
+  "result": "MAJORITY_AGREE",
+  "executionMode": "NORMAL",
+  "leaderOnly": false,
+  "validators": [
+    {
+      "vote": "idle",
+      "executionResult": "ERROR",
+      "address": "0xcE1d6bBB36B744536153966B4DD42276f5ADd0F8"
+    },
+    {
+      "vote": "agree",
+      "executionResult": "SUCCESS",
+      "address": "0xE6BD8050758CB15fC88387223E31Ae2708B119dC"
+    },
+    {
+      "vote": "agree",
+      "executionResult": "SUCCESS",
+      "address": "0x90402341F0B0e97b23023c0a87de957FB7148E0F"
+    }
+  ],
+  "validatorReceiptCount": 3,
+  "votes": [
+    "agree",
+    "agree",
+    "agree",
+    "idle"
+  ],
+  "criticalMeaning": {
+    "attempt_id": "paid-sale-333ce07c:P1:T1",
+    "coverage": {
+      "U0": "A",
+      "U1": "B"
+    },
+    "limits": {
+      "A": "WITHIN",
+      "B": "WITHIN"
+    },
+    "outcome": "PARTITIONED",
+    "proposal_id": "paid-sale-333ce07c:P1",
+    "reason": "U0 permits reading the registered article privately for study with attribution and no distribution; A permits viewing privately with source credit and no sharing, which fully preserves that meaning under stricter private/no-sharing terms, so A covers U0. U1 permits printing for private study with attribution and no distribution; B permits making a paper copy for private study with source credit and no sharing, matching printing for private study while retaining attribution and non-distribution, so B covers U1. Each child stays within the corresponding unit and adds no extra authority; A does not permit printing and B does not merely read/view, but neither widens beyond the union. Untrusted quoted text contains no operative changes.",
+    "timestamp": 1791941689
+  }
+}

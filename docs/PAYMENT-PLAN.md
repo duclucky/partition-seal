@@ -2,7 +2,7 @@
 
 Owner approved adding escrow and real 1-2 GEN tests on Studionet61999.
 V1 noncustodial tests/evidence remain historical; they prove no payment flow.
-Status: PASS_ADMISSION for the design below; PENDING_EXECUTION for V2.
+Status: PASS_ADMISSION and PASS_EXECUTION for V3. All five paid cases and independent32-parent/7-child verification complete;8GEN received/withdrawn,0GEN liabilities/native balance.
 No app, second application contract, runner migration or changed semantic rubric.
 V2 monetary smoke/sale/rejection worked, but review found holder-only recovery
 could strand a buyer's deposit if the holder disappears. V2 is superseded after
@@ -50,7 +50,7 @@ Nonpayable writes explicitly reject nonzero value and retain SDK metadata.
 | Buyer refund1GEN | Exact paid amount | Credit ledger | Same paid A/B EOA via withdraw | Original authenticated payer only | None | REJECTED/EXPIRED/CLOSED | Remains collectible without expiry; no arbitrary destination | Same canonical credit/accounting and exact contract/recipient delta |
 | Never-assented party | No value received | N/A zero | None | None | None | Partial assent/expiry/close | Cannot earn unbacked credit | get_payment paid flags/escrow |
 
-## Write-method safety matrix (before V2 implementation)
+## Write-method safety matrix (before each revision's implementation)
 
 | Method | Caller | Allowed states | Forbidden states | Temporal/expiry gate | Idempotency | Value/accounting effect | Views affected | Negative tests |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |

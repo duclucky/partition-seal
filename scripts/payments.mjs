@@ -1,4 +1,4 @@
-import {formatUnits} from 'viem';
+import {formatUnits,keccak256} from 'viem';
 import {createHash} from 'node:crypto';
 import {actors,client,chainCheck,finalized,read,jsonFile,save,reportError,safeSdk,EXPLORER} from './network.mjs';
 import {valueReceipt,assertValueReceipt} from './value_receipts.mjs';
@@ -41,7 +41,8 @@ export async function runPayments(mode='all'){
    const nonce=await reader.getCurrentNonce({address:accounts[0].address});
    f.status='SUBMITTING';f.nonce=Number(nonce);persist();
    const serialized=await accounts[0].signTransaction({to:accounts[1].address,value:2n*GEN,nonce:Number(nonce),chainId:61999,type:'legacy',gas:21000n,gasPrice:0n});
-   f.transactionHash=await reader.request({method:'eth_sendRawTransaction',params:[serialized]});f.status='SUBMITTED';persist();
+   f.transactionHash=keccak256(serialized);f.signedTransactionHash=f.transactionHash;f.status='SIGNED';persist();
+   f.transactionHash=await safeSdk(()=>reader.request({method:'eth_sendRawTransaction',params:[serialized]}));f.status='SUBMITTED';persist();
    console.log(JSON.stringify({step:'fund-recipientA',status:f.status,transactionHash:f.transactionHash,valueGen:'2'}));
   }
   const raw=await waitRaw(f.transactionHash);
@@ -66,6 +67,9 @@ export async function runPayments(mode='all'){
    console.log(JSON.stringify({case:c.name,step:name,status:s.status,transactionHash:s.transactionHash,valueGen}));
   }
   const receipt=await finalized(reader,s.transactionHash);Object.assign(s,receipt);persist();
+  const origin=await rawTx(s.transactionHash);
+  if(origin.from_address?.toLowerCase()!==accounts[index].address.toLowerCase()||origin.to_address?.toLowerCase()!==address.toLowerCase()||BigInt(origin.value)!==BigInt(valueGen)*GEN)throw new Error('Actual signed sender/destination/value mismatch');
+  s.sender=origin.from_address;s.recipient=origin.to_address;
   s.afterContractGen=formatUnits(await balance(address),18);s.afterActorGen=formatUnits(await balance(accounts[index].address),18);
   if(functionName==='assent'&&parseGen(s.afterContractGen)-parseGen(s.beforeContractGen)!==GEN)throw new Error('Deposit exact native balance increase missing');
   if(functionName==='withdraw'){

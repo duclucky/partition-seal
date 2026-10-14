@@ -2,6 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import {createHash} from 'node:crypto';
 import {execFileSync} from 'node:child_process';
+import {keccak256} from 'viem';
 import {ROOT,EXPLORER,actors,client,chainCheck,finalized,read,jsonFile,save,reportError,safeSdk} from './network.mjs';
 const filename='contracts/partition_seal.py';
 const source=fs.readFileSync(path.join(ROOT,filename));
@@ -16,10 +17,21 @@ try{
  if(record&&(record.network!=='studionet'||record.chainId!==61999||record.sourceSHA256!==sourceSHA256))throw new Error('Deployment revision mismatch; explicit archive required');
  if(!record){
   const account=actors()[0];
-  const signer=client(account);
-  const hash=await safeSdk(()=>signer.deployContract({code:new Uint8Array(source),args:[]}));
   record={network:'studionet',chainId:61999,sourceCommit:commit,sourceSHA256,contractRevision:'PARTITION_SEAL_V3_ESCROW',contractApiVersion:'v0.2.16',dependsRunner:'py-genlayer:1jb45aa8ynh2a9c9xn3b7qqh8sm5q93hwfp7jqmwsfhh8jpz09h6',
-   transactionHash:hash,status:'SUBMITTED',valueGen:'0',submittedAt:new Date().toISOString()};
+   status:'PREPARED',valueGen:'0',preparedAt:new Date().toISOString()};
+  save('deployment.json',record);
+ }
+ if(!record.transactionHash){
+  if(record.status!=='PREPARED')throw new Error('Ambiguous deploy before signed hash; reconcile saved nonce before retry');
+  const account=actors()[0];
+  record.preSubmitNonce=String(await reader.getCurrentNonce({address:account.address}));save('deployment.json',record);
+  const signer=client({...account,signTransaction:async(...args)=>{
+   const serialized=await account.signTransaction(...args);
+   record.signedTransactionHash=keccak256(serialized);record.transactionHash=record.signedTransactionHash;
+   record.status='SIGNED';save('deployment.json',record);return serialized;
+  }});
+  const hash=await safeSdk(()=>signer.deployContract({code:new Uint8Array(source),args:[]}));
+  record.transactionHash=hash;record.status='SUBMITTED';record.submittedAt=new Date().toISOString();
   save('deployment.json',record);console.log(JSON.stringify({step:'deploy',transactionHash:hash,status:'SUBMITTED',valueGen:'0'}));
  }
  const receipt=await finalized(reader,record.transactionHash);

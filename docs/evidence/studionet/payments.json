@@ -1,0 +1,1187 @@
+{
+  "network": "studionet",
+  "chainId": 61999,
+  "contractAddress": "0xF6027BFEd18Fc5e50c1E6f56f015bbB5826F7EAD",
+  "sourceCommit": "88663f2ef7674444aeb6ab9dde06fab84b30c65a",
+  "sourceSHA256": "333ce07cb91bbf8e8d90fcd6b71689762678ad51f3e5bae88f89140c1aa096a3",
+  "cases": {
+    "smoke": {
+      "name": "smoke",
+      "kind": "smoke",
+      "rootId": "paid-smoke-333ce07c",
+      "rootExpiry": 1791948405,
+      "steps": {
+        "create": {
+          "status": "FINALIZED",
+          "functionName": "create_root",
+          "valueGen": "0",
+          "beforeContractGen": "0",
+          "beforeActorGen": "1784.6399969999999882",
+          "transactionHash": "0xe357d2786fbab996ec9f5821458371397a5aa195fbb84ba0e944b3c896613618",
+          "explorerUrl": "https://explorer-studio.genlayer.com/tx/0xe357d2786fbab996ec9f5821458371397a5aa195fbb84ba0e944b3c896613618",
+          "executionResult": "SUCCESS",
+          "consensusResult": "MAJORITY_AGREE",
+          "contractAddress": "0xF6027BFEd18Fc5e50c1E6f56f015bbB5826F7EAD",
+          "validatorCount": 4,
+          "afterContractGen": "0",
+          "afterActorGen": "1784.6399969999999882",
+          "verified": true
+        },
+        "propose": {
+          "status": "FINALIZED",
+          "functionName": "propose_partition",
+          "valueGen": "0",
+          "beforeContractGen": "0",
+          "beforeActorGen": "1784.6399969999999882",
+          "transactionHash": "0xff7768b98e2c75aecfdc31eade5a83eeff52b1d4fb784a861da9f00b8427b462",
+          "explorerUrl": "https://explorer-studio.genlayer.com/tx/0xff7768b98e2c75aecfdc31eade5a83eeff52b1d4fb784a861da9f00b8427b462",
+          "executionResult": "SUCCESS",
+          "consensusResult": "MAJORITY_AGREE",
+          "contractAddress": "0xF6027BFEd18Fc5e50c1E6f56f015bbB5826F7EAD",
+          "validatorCount": 4,
+          "afterContractGen": "0",
+          "afterActorGen": "1784.6399969999999882",
+          "verified": true
+        },
+        "assentA": {
+          "status": "FINALIZED",
+          "functionName": "assent",
+          "valueGen": "1",
+          "beforeContractGen": "0",
+          "beforeActorGen": "3",
+          "transactionHash": "0xd35a02e532eb63bde89da9038af2097f84342c936e147847ab22600fa4ff655b",
+          "explorerUrl": "https://explorer-studio.genlayer.com/tx/0xd35a02e532eb63bde89da9038af2097f84342c936e147847ab22600fa4ff655b",
+          "executionResult": "SUCCESS",
+          "consensusResult": "MAJORITY_AGREE",
+          "contractAddress": "0xF6027BFEd18Fc5e50c1E6f56f015bbB5826F7EAD",
+          "validatorCount": 4,
+          "afterContractGen": "1",
+          "afterActorGen": "2",
+          "verified": true
+        },
+        "expire": {
+          "status": "FINALIZED",
+          "functionName": "expire_proposal",
+          "valueGen": "0",
+          "beforeContractGen": "1",
+          "beforeActorGen": "2",
+          "transactionHash": "0xb7b5e21b1e442f0f1555bbf3db98c71df68c220e68574749cfe8c7d5cdcc1684",
+          "explorerUrl": "https://explorer-studio.genlayer.com/tx/0xb7b5e21b1e442f0f1555bbf3db98c71df68c220e68574749cfe8c7d5cdcc1684",
+          "executionResult": "SUCCESS",
+          "consensusResult": "MAJORITY_AGREE",
+          "contractAddress": "0xF6027BFEd18Fc5e50c1E6f56f015bbB5826F7EAD",
+          "validatorCount": 4,
+          "afterContractGen": "1",
+          "afterActorGen": "2",
+          "verified": true
+        },
+        "withdraw1": {
+          "status": "FINALIZED",
+          "functionName": "withdraw",
+          "valueGen": "0",
+          "expectedWithdrawGen": "1",
+          "beforeContractGen": "1",
+          "beforeActorGen": "2",
+          "transactionHash": "0x990c943c204cabfe461c88c8bc832ce30ebc6491b43293380080819c39b5fd91",
+          "explorerUrl": "https://explorer-studio.genlayer.com/tx/0x990c943c204cabfe461c88c8bc832ce30ebc6491b43293380080819c39b5fd91",
+          "executionResult": "SUCCESS",
+          "consensusResult": "MAJORITY_AGREE",
+          "contractAddress": "0xF6027BFEd18Fc5e50c1E6f56f015bbB5826F7EAD",
+          "validatorCount": 4,
+          "afterContractGen": "0",
+          "afterActorGen": "3",
+          "children": [
+            {
+              "transactionHash": "0x095d2e19368c7335943849e4f0281c26dfe23bf7aae8f69461575feff46b24df",
+              "status": "FINALIZED",
+              "sender": "0xF6027BFEd18Fc5e50c1E6f56f015bbB5826F7EAD",
+              "recipient": "0x45248be151F7f7e230150db23774733Cd966Eb45",
+              "valueGen": "1",
+              "executionResult": null,
+              "parentHash": "0x990c943c204cabfe461c88c8bc832ce30ebc6491b43293380080819c39b5fd91",
+              "explicitError": false
+            }
+          ],
+          "verified": true
+        }
+      },
+      "deadline": 1791941422,
+      "proposalId": "paid-smoke-333ce07c:P1",
+      "beforeWithdraw": {
+        "payment": {
+          "escrow_gen": "0",
+          "paid_a": true,
+          "paid_b": false,
+          "price_per_recipient_gen": "1",
+          "proposal_id": "paid-smoke-333ce07c:P1",
+          "status": "REFUND_CREDIT"
+        },
+        "accounting": {
+          "credit_gen": "1",
+          "escrow_gen": "0",
+          "liability_gen": "1",
+          "received_gen": "1",
+          "withdrawn_gen": "0"
+        },
+        "credits": [
+          {
+            "credit_gen": "0",
+            "owner": "0xc495ef51618d03267a1f227afe5b27b38c748272"
+          },
+          {
+            "credit_gen": "1",
+            "owner": "0x45248be151f7f7e230150db23774733cd966eb45"
+          },
+          {
+            "credit_gen": "0",
+            "owner": "0x45ad397c438397a702b53a7499a78d08961d39db"
+          }
+        ]
+      },
+      "canonicalReads": {
+        "root": {
+          "U0": "May read the registered article for private study with attribution; no distribution.",
+          "U1": "May print the registered article for private study with attribution; no distribution.",
+          "expiry": 1791948405,
+          "holder": "0xc495ef51618d03267a1f227afe5b27b38c748272",
+          "proposal_id": "paid-smoke-333ce07c:P1",
+          "root_id": "paid-smoke-333ce07c",
+          "sequence": 1,
+          "status": "ACTIVE",
+          "target": "article"
+        },
+        "proposal": {
+          "assent_a": true,
+          "assent_b": false,
+          "attempts": 0,
+          "deadline": 1791941422,
+          "digest": "9b90e70ebfeb3719b160e3ec8f467e07e19d3c99459a7239956330c7491b1a8a",
+          "proposal_id": "paid-smoke-333ce07c:P1",
+          "recipient_a": "0x45248be151f7f7e230150db23774733cd966eb45",
+          "recipient_b": "0x45ad397c438397a702b53a7499a78d08961d39db",
+          "root_id": "paid-smoke-333ce07c",
+          "scope_a": "May view the registered article privately with source credit; no sharing.",
+          "scope_b": "May make a paper copy of the registered article for private study with source credit; no sharing.",
+          "status": "EXPIRED"
+        },
+        "payment": {
+          "escrow_gen": "0",
+          "paid_a": true,
+          "paid_b": false,
+          "price_per_recipient_gen": "1",
+          "proposal_id": "paid-smoke-333ce07c:P1",
+          "status": "REFUND_CREDIT"
+        },
+        "accounting": {
+          "credit_gen": "0",
+          "escrow_gen": "0",
+          "liability_gen": "0",
+          "received_gen": "1",
+          "withdrawn_gen": "1"
+        },
+        "U0": {
+          "active": true,
+          "consumed": false,
+          "expiry": 1791948405,
+          "owner": "0xc495ef51618d03267a1f227afe5b27b38c748272",
+          "root_id": "paid-smoke-333ce07c",
+          "scope": "May read the registered article for private study with attribution; no distribution.",
+          "unit_id": "paid-smoke-333ce07c:U0"
+        },
+        "U1": {
+          "active": true,
+          "consumed": false,
+          "expiry": 1791948405,
+          "owner": "0xc495ef51618d03267a1f227afe5b27b38c748272",
+          "root_id": "paid-smoke-333ce07c",
+          "scope": "May print the registered article for private study with attribution; no distribution.",
+          "unit_id": "paid-smoke-333ce07c:U1"
+        }
+      },
+      "nativeBalanceGen": "0",
+      "complete": true,
+      "verifiedAt": "2026-10-14T01:32:05.469Z"
+    },
+    "sale": {
+      "name": "sale",
+      "kind": "sale",
+      "rootId": "paid-sale-333ce07c",
+      "rootExpiry": 1791948725,
+      "steps": {
+        "create": {
+          "status": "FINALIZED",
+          "functionName": "create_root",
+          "valueGen": "0",
+          "beforeContractGen": "0",
+          "beforeActorGen": "1784.6399969999999882",
+          "transactionHash": "0x2a00cd1915961c82856a7844616bc84ea2537ef70983261c6d2312b3fccb4556",
+          "explorerUrl": "https://explorer-studio.genlayer.com/tx/0x2a00cd1915961c82856a7844616bc84ea2537ef70983261c6d2312b3fccb4556",
+          "executionResult": "SUCCESS",
+          "consensusResult": "MAJORITY_AGREE",
+          "contractAddress": "0xF6027BFEd18Fc5e50c1E6f56f015bbB5826F7EAD",
+          "validatorCount": 4,
+          "afterContractGen": "0",
+          "afterActorGen": "1784.6399969999999882",
+          "verified": true
+        },
+        "propose": {
+          "status": "FINALIZED",
+          "functionName": "propose_partition",
+          "valueGen": "0",
+          "beforeContractGen": "0",
+          "beforeActorGen": "1784.6399969999999882",
+          "transactionHash": "0x67fc863ffd441ee390c4651567bb1eb35956ba440221fb49b235933b35ffa43b",
+          "explorerUrl": "https://explorer-studio.genlayer.com/tx/0x67fc863ffd441ee390c4651567bb1eb35956ba440221fb49b235933b35ffa43b",
+          "executionResult": "SUCCESS",
+          "consensusResult": "MAJORITY_AGREE",
+          "contractAddress": "0xF6027BFEd18Fc5e50c1E6f56f015bbB5826F7EAD",
+          "validatorCount": 4,
+          "afterContractGen": "0",
+          "afterActorGen": "1784.6399969999999882",
+          "verified": true
+        },
+        "assentA": {
+          "status": "FINALIZED",
+          "functionName": "assent",
+          "valueGen": "1",
+          "beforeContractGen": "0",
+          "beforeActorGen": "3",
+          "transactionHash": "0xc49e1224a011a8baaaeb5d7228ef472457ca0d1fb750cfad3ad06491763ce586",
+          "explorerUrl": "https://explorer-studio.genlayer.com/tx/0xc49e1224a011a8baaaeb5d7228ef472457ca0d1fb750cfad3ad06491763ce586",
+          "executionResult": "SUCCESS",
+          "consensusResult": "MAJORITY_AGREE",
+          "contractAddress": "0xF6027BFEd18Fc5e50c1E6f56f015bbB5826F7EAD",
+          "validatorCount": 4,
+          "afterContractGen": "1",
+          "afterActorGen": "2",
+          "verified": true
+        },
+        "assentB": {
+          "status": "FINALIZED",
+          "functionName": "assent",
+          "valueGen": "1",
+          "beforeContractGen": "1",
+          "beforeActorGen": "6.521000000000001975",
+          "transactionHash": "0x39db18842fadafe1111d5a5ddfa726abad48dd3644f9f619846493b8f925cf48",
+          "explorerUrl": "https://explorer-studio.genlayer.com/tx/0x39db18842fadafe1111d5a5ddfa726abad48dd3644f9f619846493b8f925cf48",
+          "executionResult": "SUCCESS",
+          "consensusResult": "MAJORITY_AGREE",
+          "contractAddress": "0xF6027BFEd18Fc5e50c1E6f56f015bbB5826F7EAD",
+          "validatorCount": 4,
+          "afterContractGen": "2",
+          "afterActorGen": "5.521000000000001975",
+          "verified": true
+        },
+        "review": {
+          "status": "FINALIZED",
+          "functionName": "review_partition",
+          "valueGen": "0",
+          "beforeContractGen": "2",
+          "beforeActorGen": "1784.6399969999999882",
+          "transactionHash": "0xd7e928fa1ba94e13cb9650bb46a358233960bb0c1cdfefaf92c666f5d1af029f",
+          "explorerUrl": "https://explorer-studio.genlayer.com/tx/0xd7e928fa1ba94e13cb9650bb46a358233960bb0c1cdfefaf92c666f5d1af029f",
+          "executionResult": "SUCCESS",
+          "consensusResult": "MAJORITY_AGREE",
+          "contractAddress": "0xF6027BFEd18Fc5e50c1E6f56f015bbB5826F7EAD",
+          "validatorCount": 3,
+          "afterContractGen": "2",
+          "afterActorGen": "1784.6399969999999882",
+          "verified": true
+        },
+        "withdraw0": {
+          "status": "FINALIZED",
+          "functionName": "withdraw",
+          "valueGen": "0",
+          "expectedWithdrawGen": "2",
+          "beforeContractGen": "2",
+          "beforeActorGen": "1784.6399969999999882",
+          "transactionHash": "0xf67baa9ff9033c49985d8010a3fc3fe516ddda0c108fd8bd999fc365a1f6dce5",
+          "explorerUrl": "https://explorer-studio.genlayer.com/tx/0xf67baa9ff9033c49985d8010a3fc3fe516ddda0c108fd8bd999fc365a1f6dce5",
+          "executionResult": "SUCCESS",
+          "consensusResult": "MAJORITY_AGREE",
+          "contractAddress": "0xF6027BFEd18Fc5e50c1E6f56f015bbB5826F7EAD",
+          "validatorCount": 4,
+          "afterContractGen": "0",
+          "afterActorGen": "1786.6399969999999882",
+          "children": [
+            {
+              "transactionHash": "0x5753c40697f256886492a3291fa6e2cedfed6d3eae66f571b40d88fce788060f",
+              "status": "FINALIZED",
+              "sender": "0xF6027BFEd18Fc5e50c1E6f56f015bbB5826F7EAD",
+              "recipient": "0xC495ef51618D03267A1f227aFe5b27B38c748272",
+              "valueGen": "2",
+              "executionResult": null,
+              "parentHash": "0xf67baa9ff9033c49985d8010a3fc3fe516ddda0c108fd8bd999fc365a1f6dce5",
+              "explicitError": false
+            }
+          ],
+          "verified": true
+        },
+        "consumeU0": {
+          "status": "FINALIZED",
+          "functionName": "consume",
+          "valueGen": "0",
+          "beforeContractGen": "0",
+          "beforeActorGen": "2",
+          "transactionHash": "0x4fc120064a6b38470edb1c8d15c66c499a50fb698517215260220f5944631c6e",
+          "explorerUrl": "https://explorer-studio.genlayer.com/tx/0x4fc120064a6b38470edb1c8d15c66c499a50fb698517215260220f5944631c6e",
+          "executionResult": "SUCCESS",
+          "consensusResult": "MAJORITY_AGREE",
+          "contractAddress": "0xF6027BFEd18Fc5e50c1E6f56f015bbB5826F7EAD",
+          "validatorCount": 4,
+          "afterContractGen": "0",
+          "afterActorGen": "2",
+          "verified": true
+        },
+        "consumeU1": {
+          "status": "FINALIZED",
+          "functionName": "consume",
+          "valueGen": "0",
+          "beforeContractGen": "0",
+          "beforeActorGen": "5.521000000000001975",
+          "transactionHash": "0x2f81dd9fddd7e00e6e150a36bd6739788a30c5ef3d973b29e19ce5e80e19cf3c",
+          "explorerUrl": "https://explorer-studio.genlayer.com/tx/0x2f81dd9fddd7e00e6e150a36bd6739788a30c5ef3d973b29e19ce5e80e19cf3c",
+          "executionResult": "SUCCESS",
+          "consensusResult": "MAJORITY_AGREE",
+          "contractAddress": "0xF6027BFEd18Fc5e50c1E6f56f015bbB5826F7EAD",
+          "validatorCount": 4,
+          "afterContractGen": "0",
+          "afterActorGen": "5.521000000000001975",
+          "verified": true
+        }
+      },
+      "deadline": 1791945165,
+      "proposalId": "paid-sale-333ce07c:P1",
+      "attempt": {
+        "attempt_id": "paid-sale-333ce07c:P1:T1",
+        "coverage": {
+          "U0": "A",
+          "U1": "B"
+        },
+        "limits": {
+          "A": "WITHIN",
+          "B": "WITHIN"
+        },
+        "outcome": "PARTITIONED",
+        "proposal_id": "paid-sale-333ce07c:P1",
+        "reason": "U0 permits reading the registered article privately for study with attribution and no distribution; A permits viewing privately with source credit and no sharing, which fully preserves that meaning under stricter private/no-sharing terms, so A covers U0. U1 permits printing for private study with attribution and no distribution; B permits making a paper copy for private study with source credit and no sharing, matching printing for private study while retaining attribution and non-distribution, so B covers U1. Each child stays within the corresponding unit and adds no extra authority; A does not permit printing and B does not merely read/view, but neither widens beyond the union. Untrusted quoted text contains no operative changes.",
+        "timestamp": 1791941689
+      },
+      "beforeWithdraw": {
+        "payment": {
+          "escrow_gen": "0",
+          "paid_a": true,
+          "paid_b": true,
+          "price_per_recipient_gen": "1",
+          "proposal_id": "paid-sale-333ce07c:P1",
+          "status": "HOLDER_CREDIT"
+        },
+        "accounting": {
+          "credit_gen": "2",
+          "escrow_gen": "0",
+          "liability_gen": "2",
+          "received_gen": "3",
+          "withdrawn_gen": "1"
+        },
+        "credits": [
+          {
+            "credit_gen": "2",
+            "owner": "0xc495ef51618d03267a1f227afe5b27b38c748272"
+          },
+          {
+            "credit_gen": "0",
+            "owner": "0x45248be151f7f7e230150db23774733cd966eb45"
+          },
+          {
+            "credit_gen": "0",
+            "owner": "0x45ad397c438397a702b53a7499a78d08961d39db"
+          }
+        ]
+      },
+      "canonicalReads": {
+        "root": {
+          "U0": "May read the registered article for private study with attribution; no distribution.",
+          "U1": "May print the registered article for private study with attribution; no distribution.",
+          "expiry": 1791948725,
+          "holder": "0xc495ef51618d03267a1f227afe5b27b38c748272",
+          "proposal_id": "paid-sale-333ce07c:P1",
+          "root_id": "paid-sale-333ce07c",
+          "sequence": 1,
+          "status": "SPLIT",
+          "target": "article"
+        },
+        "proposal": {
+          "assent_a": true,
+          "assent_b": true,
+          "attempts": 1,
+          "deadline": 1791945165,
+          "digest": "eafba896cc166e079b76885c1d711793167bf8e95c8a45be99dde11bdcb8f09e",
+          "proposal_id": "paid-sale-333ce07c:P1",
+          "recipient_a": "0x45248be151f7f7e230150db23774733cd966eb45",
+          "recipient_b": "0x45ad397c438397a702b53a7499a78d08961d39db",
+          "root_id": "paid-sale-333ce07c",
+          "scope_a": "May view the registered article privately with source credit; no sharing.",
+          "scope_b": "May make a paper copy of the registered article for private study with source credit; no sharing.",
+          "status": "PARTITIONED"
+        },
+        "payment": {
+          "escrow_gen": "0",
+          "paid_a": true,
+          "paid_b": true,
+          "price_per_recipient_gen": "1",
+          "proposal_id": "paid-sale-333ce07c:P1",
+          "status": "HOLDER_CREDIT"
+        },
+        "accounting": {
+          "credit_gen": "0",
+          "escrow_gen": "0",
+          "liability_gen": "0",
+          "received_gen": "3",
+          "withdrawn_gen": "3"
+        },
+        "U0": {
+          "active": false,
+          "consumed": true,
+          "expiry": 1791948725,
+          "owner": "0x45248be151f7f7e230150db23774733cd966eb45",
+          "root_id": "paid-sale-333ce07c",
+          "scope": "May view the registered article privately with source credit; no sharing.",
+          "unit_id": "paid-sale-333ce07c:U0"
+        },
+        "U1": {
+          "active": false,
+          "consumed": true,
+          "expiry": 1791948725,
+          "owner": "0x45ad397c438397a702b53a7499a78d08961d39db",
+          "root_id": "paid-sale-333ce07c",
+          "scope": "May make a paper copy of the registered article for private study with source credit; no sharing.",
+          "unit_id": "paid-sale-333ce07c:U1"
+        }
+      },
+      "nativeBalanceGen": "0",
+      "complete": true,
+      "verifiedAt": "2026-10-14T01:39:40.890Z"
+    },
+    "rejected": {
+      "name": "rejected",
+      "kind": "rejected",
+      "rootId": "paid-rejected-333ce07c",
+      "rootExpiry": 1791949180,
+      "steps": {
+        "create": {
+          "status": "FINALIZED",
+          "functionName": "create_root",
+          "valueGen": "0",
+          "beforeContractGen": "0",
+          "beforeActorGen": "1786.6399969999999882",
+          "transactionHash": "0xd512d4f3d61e4e5da18ca0c14ff8ced81bd1134ef85784908ba1bfd66cb4b6c7",
+          "explorerUrl": "https://explorer-studio.genlayer.com/tx/0xd512d4f3d61e4e5da18ca0c14ff8ced81bd1134ef85784908ba1bfd66cb4b6c7",
+          "executionResult": "SUCCESS",
+          "consensusResult": "MAJORITY_AGREE",
+          "contractAddress": "0xF6027BFEd18Fc5e50c1E6f56f015bbB5826F7EAD",
+          "validatorCount": 4,
+          "afterContractGen": "0",
+          "afterActorGen": "1786.6399969999999882",
+          "verified": true
+        },
+        "propose": {
+          "status": "FINALIZED",
+          "functionName": "propose_partition",
+          "valueGen": "0",
+          "beforeContractGen": "0",
+          "beforeActorGen": "1786.6399969999999882",
+          "transactionHash": "0x5ac128874f661697e0de4dae533b2476ef076e841ebe9ac7775d8fb97609605e",
+          "explorerUrl": "https://explorer-studio.genlayer.com/tx/0x5ac128874f661697e0de4dae533b2476ef076e841ebe9ac7775d8fb97609605e",
+          "executionResult": "SUCCESS",
+          "consensusResult": "MAJORITY_AGREE",
+          "contractAddress": "0xF6027BFEd18Fc5e50c1E6f56f015bbB5826F7EAD",
+          "validatorCount": 4,
+          "afterContractGen": "0",
+          "afterActorGen": "1786.6399969999999882",
+          "verified": true
+        },
+        "assentA": {
+          "status": "FINALIZED",
+          "functionName": "assent",
+          "valueGen": "1",
+          "beforeContractGen": "0",
+          "beforeActorGen": "2",
+          "transactionHash": "0xb45a399e1ca71bce1b21fab4e3a3ac10b1821bfe9a29f06da1b2d37b719d33ce",
+          "explorerUrl": "https://explorer-studio.genlayer.com/tx/0xb45a399e1ca71bce1b21fab4e3a3ac10b1821bfe9a29f06da1b2d37b719d33ce",
+          "executionResult": "SUCCESS",
+          "consensusResult": "MAJORITY_AGREE",
+          "contractAddress": "0xF6027BFEd18Fc5e50c1E6f56f015bbB5826F7EAD",
+          "validatorCount": 4,
+          "afterContractGen": "1",
+          "afterActorGen": "1",
+          "verified": true
+        },
+        "assentB": {
+          "status": "FINALIZED",
+          "functionName": "assent",
+          "valueGen": "1",
+          "beforeContractGen": "1",
+          "beforeActorGen": "5.521000000000001975",
+          "transactionHash": "0x5ee9e57441e60d2b15fe6981a45edee69d2d439a58046fed5f73772509b4a0f5",
+          "explorerUrl": "https://explorer-studio.genlayer.com/tx/0x5ee9e57441e60d2b15fe6981a45edee69d2d439a58046fed5f73772509b4a0f5",
+          "executionResult": "SUCCESS",
+          "consensusResult": "MAJORITY_AGREE",
+          "contractAddress": "0xF6027BFEd18Fc5e50c1E6f56f015bbB5826F7EAD",
+          "validatorCount": 4,
+          "afterContractGen": "2",
+          "afterActorGen": "4.521000000000001975",
+          "verified": true
+        },
+        "review": {
+          "status": "FINALIZED",
+          "functionName": "review_partition",
+          "valueGen": "0",
+          "beforeContractGen": "2",
+          "beforeActorGen": "1786.6399969999999882",
+          "transactionHash": "0xc264f136d78ee90ad762641f5fc3d9b9cfb315ffac58269c22da56e7e4601e94",
+          "explorerUrl": "https://explorer-studio.genlayer.com/tx/0xc264f136d78ee90ad762641f5fc3d9b9cfb315ffac58269c22da56e7e4601e94",
+          "executionResult": "SUCCESS",
+          "consensusResult": "MAJORITY_AGREE",
+          "contractAddress": "0xF6027BFEd18Fc5e50c1E6f56f015bbB5826F7EAD",
+          "validatorCount": 4,
+          "afterContractGen": "2",
+          "afterActorGen": "1786.6399969999999882",
+          "verified": true
+        },
+        "withdraw1": {
+          "status": "FINALIZED",
+          "functionName": "withdraw",
+          "valueGen": "0",
+          "expectedWithdrawGen": "1",
+          "beforeContractGen": "2",
+          "beforeActorGen": "1",
+          "transactionHash": "0x5bcf115a0a48e27f76161712d546a7c969c920291c29cae0b3a5e1185b05b9ec",
+          "explorerUrl": "https://explorer-studio.genlayer.com/tx/0x5bcf115a0a48e27f76161712d546a7c969c920291c29cae0b3a5e1185b05b9ec",
+          "executionResult": "SUCCESS",
+          "consensusResult": "MAJORITY_AGREE",
+          "contractAddress": "0xF6027BFEd18Fc5e50c1E6f56f015bbB5826F7EAD",
+          "validatorCount": 4,
+          "afterContractGen": "1",
+          "afterActorGen": "2",
+          "children": [
+            {
+              "transactionHash": "0x7ba21a4b11a2d990d2d57ceb45ee6dca924dfcb57c80256d797c2550347aa41e",
+              "status": "FINALIZED",
+              "sender": "0xF6027BFEd18Fc5e50c1E6f56f015bbB5826F7EAD",
+              "recipient": "0x45248be151F7f7e230150db23774733Cd966Eb45",
+              "valueGen": "1",
+              "executionResult": null,
+              "parentHash": "0x5bcf115a0a48e27f76161712d546a7c969c920291c29cae0b3a5e1185b05b9ec",
+              "explicitError": false
+            }
+          ],
+          "verified": true
+        },
+        "withdraw2": {
+          "status": "FINALIZED",
+          "functionName": "withdraw",
+          "valueGen": "0",
+          "expectedWithdrawGen": "1",
+          "beforeContractGen": "1",
+          "beforeActorGen": "4.521000000000001975",
+          "transactionHash": "0xf489f89a3b5111b88348050f79a00b394b8bacaa7b248540389c26d0f65bc3d8",
+          "explorerUrl": "https://explorer-studio.genlayer.com/tx/0xf489f89a3b5111b88348050f79a00b394b8bacaa7b248540389c26d0f65bc3d8",
+          "executionResult": "SUCCESS",
+          "consensusResult": "MAJORITY_AGREE",
+          "contractAddress": "0xF6027BFEd18Fc5e50c1E6f56f015bbB5826F7EAD",
+          "validatorCount": 4,
+          "afterContractGen": "0",
+          "afterActorGen": "5.521000000000001975",
+          "children": [
+            {
+              "transactionHash": "0x6971ccf825e9c4bcf429f95a82dba1ab0dff28f25ad767133cb9bec7ad46dd5e",
+              "status": "FINALIZED",
+              "sender": "0xF6027BFEd18Fc5e50c1E6f56f015bbB5826F7EAD",
+              "recipient": "0x45aD397c438397A702B53a7499a78D08961D39Db",
+              "valueGen": "1",
+              "executionResult": null,
+              "parentHash": "0xf489f89a3b5111b88348050f79a00b394b8bacaa7b248540389c26d0f65bc3d8",
+              "explicitError": false
+            }
+          ],
+          "verified": true
+        }
+      },
+      "deadline": 1791945620,
+      "proposalId": "paid-rejected-333ce07c:P1",
+      "attempt": {
+        "attempt_id": "paid-rejected-333ce07c:P1:T1",
+        "coverage": {
+          "U0": "BOTH",
+          "U1": "NEITHER"
+        },
+        "limits": {
+          "A": "WITHIN",
+          "B": "WITHIN"
+        },
+        "outcome": "REJECTED",
+        "proposal_id": "paid-rejected-333ce07c:P1",
+        "reason": "U0 is fully covered by both A and B: 'view ... privately with source credit; no sharing' matches reading/viewing the article for private study with attribution and no distribution. U1 is not covered by either child because printing is a distinct operation from viewing/reading and is not permitted. Each child stays within the union of U0 and U1 because it grants only the read/view-type permission with equivalent attribution and no-distribution restrictions, without relaxing duties/prohibitions or adding extra authority.",
+        "timestamp": 1791942148
+      },
+      "beforeWithdraw": {
+        "payment": {
+          "escrow_gen": "0",
+          "paid_a": true,
+          "paid_b": true,
+          "price_per_recipient_gen": "1",
+          "proposal_id": "paid-rejected-333ce07c:P1",
+          "status": "REFUND_CREDIT"
+        },
+        "accounting": {
+          "credit_gen": "2",
+          "escrow_gen": "0",
+          "liability_gen": "2",
+          "received_gen": "5",
+          "withdrawn_gen": "3"
+        },
+        "credits": [
+          {
+            "credit_gen": "0",
+            "owner": "0xc495ef51618d03267a1f227afe5b27b38c748272"
+          },
+          {
+            "credit_gen": "1",
+            "owner": "0x45248be151f7f7e230150db23774733cd966eb45"
+          },
+          {
+            "credit_gen": "1",
+            "owner": "0x45ad397c438397a702b53a7499a78d08961d39db"
+          }
+        ]
+      },
+      "canonicalReads": {
+        "root": {
+          "U0": "May read the registered article for private study with attribution; no distribution.",
+          "U1": "May print the registered article for private study with attribution; no distribution.",
+          "expiry": 1791949180,
+          "holder": "0xc495ef51618d03267a1f227afe5b27b38c748272",
+          "proposal_id": "paid-rejected-333ce07c:P1",
+          "root_id": "paid-rejected-333ce07c",
+          "sequence": 1,
+          "status": "ACTIVE",
+          "target": "article"
+        },
+        "proposal": {
+          "assent_a": true,
+          "assent_b": true,
+          "attempts": 1,
+          "deadline": 1791945620,
+          "digest": "3f7db20113869de0b65b60a4b44840f90915f30025762356fca689e54ab0c53e",
+          "proposal_id": "paid-rejected-333ce07c:P1",
+          "recipient_a": "0x45248be151f7f7e230150db23774733cd966eb45",
+          "recipient_b": "0x45ad397c438397a702b53a7499a78d08961d39db",
+          "root_id": "paid-rejected-333ce07c",
+          "scope_a": "May view the registered article privately with source credit; no sharing.",
+          "scope_b": "May view the registered article privately with source credit; no sharing.",
+          "status": "REJECTED"
+        },
+        "payment": {
+          "escrow_gen": "0",
+          "paid_a": true,
+          "paid_b": true,
+          "price_per_recipient_gen": "1",
+          "proposal_id": "paid-rejected-333ce07c:P1",
+          "status": "REFUND_CREDIT"
+        },
+        "accounting": {
+          "credit_gen": "0",
+          "escrow_gen": "0",
+          "liability_gen": "0",
+          "received_gen": "5",
+          "withdrawn_gen": "5"
+        },
+        "U0": {
+          "active": true,
+          "consumed": false,
+          "expiry": 1791949180,
+          "owner": "0xc495ef51618d03267a1f227afe5b27b38c748272",
+          "root_id": "paid-rejected-333ce07c",
+          "scope": "May read the registered article for private study with attribution; no distribution.",
+          "unit_id": "paid-rejected-333ce07c:U0"
+        },
+        "U1": {
+          "active": true,
+          "consumed": false,
+          "expiry": 1791949180,
+          "owner": "0xc495ef51618d03267a1f227afe5b27b38c748272",
+          "root_id": "paid-rejected-333ce07c",
+          "scope": "May print the registered article for private study with attribution; no distribution.",
+          "unit_id": "paid-rejected-333ce07c:U1"
+        }
+      },
+      "nativeBalanceGen": "0",
+      "complete": true,
+      "verifiedAt": "2026-10-14T01:45:34.353Z"
+    },
+    "expiry": {
+      "name": "expiry",
+      "kind": "expiry",
+      "rootId": "paid-expiry-333ce07c",
+      "rootExpiry": 1791949534,
+      "steps": {
+        "create": {
+          "status": "FINALIZED",
+          "functionName": "create_root",
+          "valueGen": "0",
+          "beforeContractGen": "0",
+          "beforeActorGen": "1786.6399969999999882",
+          "transactionHash": "0xfc7f197205b4d17c82cce929e21755caa6951f226695fc19cd4ac44769664ec3",
+          "explorerUrl": "https://explorer-studio.genlayer.com/tx/0xfc7f197205b4d17c82cce929e21755caa6951f226695fc19cd4ac44769664ec3",
+          "executionResult": "SUCCESS",
+          "consensusResult": "MAJORITY_AGREE",
+          "contractAddress": "0xF6027BFEd18Fc5e50c1E6f56f015bbB5826F7EAD",
+          "validatorCount": 4,
+          "afterContractGen": "0",
+          "afterActorGen": "1786.6399969999999882",
+          "verified": true
+        },
+        "propose": {
+          "status": "FINALIZED",
+          "functionName": "propose_partition",
+          "valueGen": "0",
+          "beforeContractGen": "0",
+          "beforeActorGen": "1786.6399969999999882",
+          "transactionHash": "0x991c79f3b03a3f28da62c7f52ade6b5b135b2b9cd3e8308c39c9ffda8ee773da",
+          "explorerUrl": "https://explorer-studio.genlayer.com/tx/0x991c79f3b03a3f28da62c7f52ade6b5b135b2b9cd3e8308c39c9ffda8ee773da",
+          "executionResult": "SUCCESS",
+          "consensusResult": "MAJORITY_AGREE",
+          "contractAddress": "0xF6027BFEd18Fc5e50c1E6f56f015bbB5826F7EAD",
+          "validatorCount": 4,
+          "afterContractGen": "0",
+          "afterActorGen": "1786.6399969999999882",
+          "verified": true
+        },
+        "assentA": {
+          "status": "FINALIZED",
+          "functionName": "assent",
+          "valueGen": "1",
+          "beforeContractGen": "0",
+          "beforeActorGen": "2",
+          "transactionHash": "0xe0b44da8d8081435e68a5a7d456449e6811faa760e797c4d1804301893c2f95f",
+          "explorerUrl": "https://explorer-studio.genlayer.com/tx/0xe0b44da8d8081435e68a5a7d456449e6811faa760e797c4d1804301893c2f95f",
+          "executionResult": "SUCCESS",
+          "consensusResult": "MAJORITY_AGREE",
+          "contractAddress": "0xF6027BFEd18Fc5e50c1E6f56f015bbB5826F7EAD",
+          "validatorCount": 4,
+          "afterContractGen": "1",
+          "afterActorGen": "1",
+          "verified": true
+        },
+        "assentB": {
+          "status": "FINALIZED",
+          "functionName": "assent",
+          "valueGen": "1",
+          "beforeContractGen": "1",
+          "beforeActorGen": "5.521000000000001975",
+          "transactionHash": "0xa2329d00ab76884ead4854f85583ce3886f4f3a8b23d2258e6d0592a02c04634",
+          "explorerUrl": "https://explorer-studio.genlayer.com/tx/0xa2329d00ab76884ead4854f85583ce3886f4f3a8b23d2258e6d0592a02c04634",
+          "executionResult": "SUCCESS",
+          "consensusResult": "MAJORITY_AGREE",
+          "contractAddress": "0xF6027BFEd18Fc5e50c1E6f56f015bbB5826F7EAD",
+          "validatorCount": 4,
+          "afterContractGen": "2",
+          "afterActorGen": "4.521000000000001975",
+          "verified": true
+        },
+        "expire": {
+          "status": "FINALIZED",
+          "functionName": "expire_proposal",
+          "valueGen": "0",
+          "beforeContractGen": "2",
+          "beforeActorGen": "1",
+          "transactionHash": "0x1ff908fc13d0611576b522dab146121492ad39563a7eb0d6cd0cc9496931a2eb",
+          "explorerUrl": "https://explorer-studio.genlayer.com/tx/0x1ff908fc13d0611576b522dab146121492ad39563a7eb0d6cd0cc9496931a2eb",
+          "executionResult": "SUCCESS",
+          "consensusResult": "MAJORITY_AGREE",
+          "contractAddress": "0xF6027BFEd18Fc5e50c1E6f56f015bbB5826F7EAD",
+          "validatorCount": 4,
+          "afterContractGen": "2",
+          "afterActorGen": "1",
+          "verified": true
+        },
+        "withdraw1": {
+          "status": "FINALIZED",
+          "functionName": "withdraw",
+          "valueGen": "0",
+          "expectedWithdrawGen": "1",
+          "beforeContractGen": "2",
+          "beforeActorGen": "1",
+          "transactionHash": "0x09a3837bb437b6d98499a2ba82764a847e29cf0c22cea2d37afe0f36576110e5",
+          "explorerUrl": "https://explorer-studio.genlayer.com/tx/0x09a3837bb437b6d98499a2ba82764a847e29cf0c22cea2d37afe0f36576110e5",
+          "executionResult": "SUCCESS",
+          "consensusResult": "MAJORITY_AGREE",
+          "contractAddress": "0xF6027BFEd18Fc5e50c1E6f56f015bbB5826F7EAD",
+          "validatorCount": 4,
+          "afterContractGen": "1",
+          "afterActorGen": "2",
+          "children": [
+            {
+              "transactionHash": "0xc55072064f8af4ab204fb3a98d25cbfc0b7e850fcf9ecadf0d27b242a21bb648",
+              "status": "FINALIZED",
+              "sender": "0xF6027BFEd18Fc5e50c1E6f56f015bbB5826F7EAD",
+              "recipient": "0x45248be151F7f7e230150db23774733Cd966Eb45",
+              "valueGen": "1",
+              "executionResult": null,
+              "parentHash": "0x09a3837bb437b6d98499a2ba82764a847e29cf0c22cea2d37afe0f36576110e5",
+              "explicitError": false
+            }
+          ],
+          "verified": true
+        },
+        "withdraw2": {
+          "status": "FINALIZED",
+          "functionName": "withdraw",
+          "valueGen": "0",
+          "expectedWithdrawGen": "1",
+          "beforeContractGen": "1",
+          "beforeActorGen": "4.521000000000001975",
+          "transactionHash": "0xcf0010ffa0eefa6ede995ba92b167ec91abe5dff7ca8fbb3c5a7a092f63325db",
+          "explorerUrl": "https://explorer-studio.genlayer.com/tx/0xcf0010ffa0eefa6ede995ba92b167ec91abe5dff7ca8fbb3c5a7a092f63325db",
+          "executionResult": "SUCCESS",
+          "consensusResult": "MAJORITY_AGREE",
+          "contractAddress": "0xF6027BFEd18Fc5e50c1E6f56f015bbB5826F7EAD",
+          "validatorCount": 4,
+          "afterContractGen": "0",
+          "afterActorGen": "5.521000000000001975",
+          "children": [
+            {
+              "transactionHash": "0x6533c8d37ce0248466d1cdafd3e06d6e300a1cdc424f54e761264bd633b23b09",
+              "status": "FINALIZED",
+              "sender": "0xF6027BFEd18Fc5e50c1E6f56f015bbB5826F7EAD",
+              "recipient": "0x45aD397c438397A702B53a7499a78D08961D39Db",
+              "valueGen": "1",
+              "executionResult": null,
+              "parentHash": "0xcf0010ffa0eefa6ede995ba92b167ec91abe5dff7ca8fbb3c5a7a092f63325db",
+              "explicitError": false
+            }
+          ],
+          "verified": true
+        }
+      },
+      "deadline": 1791942554,
+      "proposalId": "paid-expiry-333ce07c:P1",
+      "beforeWithdraw": {
+        "payment": {
+          "escrow_gen": "0",
+          "paid_a": true,
+          "paid_b": true,
+          "price_per_recipient_gen": "1",
+          "proposal_id": "paid-expiry-333ce07c:P1",
+          "status": "REFUND_CREDIT"
+        },
+        "accounting": {
+          "credit_gen": "2",
+          "escrow_gen": "0",
+          "liability_gen": "2",
+          "received_gen": "7",
+          "withdrawn_gen": "5"
+        },
+        "credits": [
+          {
+            "credit_gen": "0",
+            "owner": "0xc495ef51618d03267a1f227afe5b27b38c748272"
+          },
+          {
+            "credit_gen": "1",
+            "owner": "0x45248be151f7f7e230150db23774733cd966eb45"
+          },
+          {
+            "credit_gen": "1",
+            "owner": "0x45ad397c438397a702b53a7499a78d08961d39db"
+          }
+        ]
+      },
+      "canonicalReads": {
+        "root": {
+          "U0": "May read the registered article for private study with attribution; no distribution.",
+          "U1": "May print the registered article for private study with attribution; no distribution.",
+          "expiry": 1791949534,
+          "holder": "0xc495ef51618d03267a1f227afe5b27b38c748272",
+          "proposal_id": "paid-expiry-333ce07c:P1",
+          "root_id": "paid-expiry-333ce07c",
+          "sequence": 1,
+          "status": "ACTIVE",
+          "target": "article"
+        },
+        "proposal": {
+          "assent_a": true,
+          "assent_b": true,
+          "attempts": 0,
+          "deadline": 1791942554,
+          "digest": "0090be71f59a9e2dd264e89907407ce86914a04cad7faff0af9910a139db3953",
+          "proposal_id": "paid-expiry-333ce07c:P1",
+          "recipient_a": "0x45248be151f7f7e230150db23774733cd966eb45",
+          "recipient_b": "0x45ad397c438397a702b53a7499a78d08961d39db",
+          "root_id": "paid-expiry-333ce07c",
+          "scope_a": "May view the registered article privately with source credit; no sharing.",
+          "scope_b": "May make a paper copy of the registered article for private study with source credit; no sharing.",
+          "status": "EXPIRED"
+        },
+        "payment": {
+          "escrow_gen": "0",
+          "paid_a": true,
+          "paid_b": true,
+          "price_per_recipient_gen": "1",
+          "proposal_id": "paid-expiry-333ce07c:P1",
+          "status": "REFUND_CREDIT"
+        },
+        "accounting": {
+          "credit_gen": "0",
+          "escrow_gen": "0",
+          "liability_gen": "0",
+          "received_gen": "7",
+          "withdrawn_gen": "7"
+        },
+        "U0": {
+          "active": true,
+          "consumed": false,
+          "expiry": 1791949534,
+          "owner": "0xc495ef51618d03267a1f227afe5b27b38c748272",
+          "root_id": "paid-expiry-333ce07c",
+          "scope": "May read the registered article for private study with attribution; no distribution.",
+          "unit_id": "paid-expiry-333ce07c:U0"
+        },
+        "U1": {
+          "active": true,
+          "consumed": false,
+          "expiry": 1791949534,
+          "owner": "0xc495ef51618d03267a1f227afe5b27b38c748272",
+          "root_id": "paid-expiry-333ce07c",
+          "scope": "May print the registered article for private study with attribution; no distribution.",
+          "unit_id": "paid-expiry-333ce07c:U1"
+        }
+      },
+      "nativeBalanceGen": "0",
+      "complete": true,
+      "verifiedAt": "2026-10-14T01:51:35.832Z"
+    },
+    "close": {
+      "name": "close",
+      "kind": "close",
+      "rootId": "paid-close-333ce07c",
+      "rootExpiry": 1791942995,
+      "steps": {
+        "create": {
+          "status": "FINALIZED",
+          "functionName": "create_root",
+          "valueGen": "0",
+          "beforeContractGen": "0",
+          "beforeActorGen": "1786.6399969999999882",
+          "transactionHash": "0x43baa84b5255b9cddf58b28c8f2a2fdf4376aa44e22b1f759e17e1877aee16c2",
+          "explorerUrl": "https://explorer-studio.genlayer.com/tx/0x43baa84b5255b9cddf58b28c8f2a2fdf4376aa44e22b1f759e17e1877aee16c2",
+          "executionResult": "SUCCESS",
+          "consensusResult": "MAJORITY_AGREE",
+          "contractAddress": "0xF6027BFEd18Fc5e50c1E6f56f015bbB5826F7EAD",
+          "validatorCount": 4,
+          "afterContractGen": "0",
+          "afterActorGen": "1786.6399969999999882",
+          "verified": true
+        },
+        "propose": {
+          "status": "FINALIZED",
+          "functionName": "propose_partition",
+          "valueGen": "0",
+          "beforeContractGen": "0",
+          "beforeActorGen": "1786.6399969999999882",
+          "transactionHash": "0x576bcb6991826db9add65d42ff5634d613f9be1309be7c849d572d11f1e56dbf",
+          "explorerUrl": "https://explorer-studio.genlayer.com/tx/0x576bcb6991826db9add65d42ff5634d613f9be1309be7c849d572d11f1e56dbf",
+          "executionResult": "SUCCESS",
+          "consensusResult": "MAJORITY_AGREE",
+          "contractAddress": "0xF6027BFEd18Fc5e50c1E6f56f015bbB5826F7EAD",
+          "validatorCount": 4,
+          "afterContractGen": "0",
+          "afterActorGen": "1786.6399969999999882",
+          "verified": true
+        },
+        "assentA": {
+          "status": "FINALIZED",
+          "functionName": "assent",
+          "valueGen": "1",
+          "beforeContractGen": "0",
+          "beforeActorGen": "2",
+          "transactionHash": "0x65ae532e3c41f215ffba327e3750add92d6a45a8725fffa80d6718d9719a5f18",
+          "explorerUrl": "https://explorer-studio.genlayer.com/tx/0x65ae532e3c41f215ffba327e3750add92d6a45a8725fffa80d6718d9719a5f18",
+          "executionResult": "SUCCESS",
+          "consensusResult": "MAJORITY_AGREE",
+          "contractAddress": "0xF6027BFEd18Fc5e50c1E6f56f015bbB5826F7EAD",
+          "validatorCount": 4,
+          "afterContractGen": "1",
+          "afterActorGen": "1",
+          "verified": true
+        },
+        "close": {
+          "status": "FINALIZED",
+          "functionName": "close_root",
+          "valueGen": "0",
+          "beforeContractGen": "1",
+          "beforeActorGen": "1",
+          "transactionHash": "0xd9c3a063022e5defad196d920524c2b17dccb545c5a4175d6c340f9b4e8af5b6",
+          "explorerUrl": "https://explorer-studio.genlayer.com/tx/0xd9c3a063022e5defad196d920524c2b17dccb545c5a4175d6c340f9b4e8af5b6",
+          "executionResult": "SUCCESS",
+          "consensusResult": "MAJORITY_AGREE",
+          "contractAddress": "0xF6027BFEd18Fc5e50c1E6f56f015bbB5826F7EAD",
+          "validatorCount": 4,
+          "afterContractGen": "1",
+          "afterActorGen": "1",
+          "verified": true
+        },
+        "withdraw1": {
+          "status": "FINALIZED",
+          "functionName": "withdraw",
+          "valueGen": "0",
+          "expectedWithdrawGen": "1",
+          "beforeContractGen": "1",
+          "beforeActorGen": "1",
+          "transactionHash": "0xba74ecb8d79907df5ad5f3c29679c6b465338c35a89f80a7f36804b0245476c8",
+          "explorerUrl": "https://explorer-studio.genlayer.com/tx/0xba74ecb8d79907df5ad5f3c29679c6b465338c35a89f80a7f36804b0245476c8",
+          "executionResult": "SUCCESS",
+          "consensusResult": "MAJORITY_AGREE",
+          "contractAddress": "0xF6027BFEd18Fc5e50c1E6f56f015bbB5826F7EAD",
+          "validatorCount": 4,
+          "afterContractGen": "0",
+          "afterActorGen": "2",
+          "children": [
+            {
+              "transactionHash": "0xf9eee6ab584220eaf0b82a52d4ae146e0b28e03f5fd91a5d29512437c600a39c",
+              "status": "FINALIZED",
+              "sender": "0xF6027BFEd18Fc5e50c1E6f56f015bbB5826F7EAD",
+              "recipient": "0x45248be151F7f7e230150db23774733Cd966Eb45",
+              "valueGen": "1",
+              "executionResult": null,
+              "parentHash": "0xba74ecb8d79907df5ad5f3c29679c6b465338c35a89f80a7f36804b0245476c8",
+              "explicitError": false
+            }
+          ],
+          "verified": true
+        }
+      },
+      "deadline": 1791942855,
+      "proposalId": "paid-close-333ce07c:P1",
+      "beforeWithdraw": {
+        "payment": {
+          "escrow_gen": "0",
+          "paid_a": true,
+          "paid_b": false,
+          "price_per_recipient_gen": "1",
+          "proposal_id": "paid-close-333ce07c:P1",
+          "status": "REFUND_CREDIT"
+        },
+        "accounting": {
+          "credit_gen": "1",
+          "escrow_gen": "0",
+          "liability_gen": "1",
+          "received_gen": "8",
+          "withdrawn_gen": "7"
+        },
+        "credits": [
+          {
+            "credit_gen": "0",
+            "owner": "0xc495ef51618d03267a1f227afe5b27b38c748272"
+          },
+          {
+            "credit_gen": "1",
+            "owner": "0x45248be151f7f7e230150db23774733cd966eb45"
+          },
+          {
+            "credit_gen": "0",
+            "owner": "0x45ad397c438397a702b53a7499a78d08961d39db"
+          }
+        ]
+      },
+      "canonicalReads": {
+        "root": {
+          "U0": "May read the registered article for private study with attribution; no distribution.",
+          "U1": "May print the registered article for private study with attribution; no distribution.",
+          "expiry": 1791942995,
+          "holder": "0xc495ef51618d03267a1f227afe5b27b38c748272",
+          "proposal_id": "paid-close-333ce07c:P1",
+          "root_id": "paid-close-333ce07c",
+          "sequence": 1,
+          "status": "CLOSED",
+          "target": "article"
+        },
+        "proposal": {
+          "assent_a": true,
+          "assent_b": false,
+          "attempts": 0,
+          "deadline": 1791942855,
+          "digest": "6c58b5f01fce041424e9846a5e89289741be6619a51fdda542ee5793089d19a5",
+          "proposal_id": "paid-close-333ce07c:P1",
+          "recipient_a": "0x45248be151f7f7e230150db23774733cd966eb45",
+          "recipient_b": "0x45ad397c438397a702b53a7499a78d08961d39db",
+          "root_id": "paid-close-333ce07c",
+          "scope_a": "May view the registered article privately with source credit; no sharing.",
+          "scope_b": "May make a paper copy of the registered article for private study with source credit; no sharing.",
+          "status": "EXPIRED"
+        },
+        "payment": {
+          "escrow_gen": "0",
+          "paid_a": true,
+          "paid_b": false,
+          "price_per_recipient_gen": "1",
+          "proposal_id": "paid-close-333ce07c:P1",
+          "status": "REFUND_CREDIT"
+        },
+        "accounting": {
+          "credit_gen": "0",
+          "escrow_gen": "0",
+          "liability_gen": "0",
+          "received_gen": "8",
+          "withdrawn_gen": "8"
+        },
+        "U0": {
+          "active": false,
+          "consumed": false,
+          "expiry": 1791942995,
+          "owner": "0xc495ef51618d03267a1f227afe5b27b38c748272",
+          "root_id": "paid-close-333ce07c",
+          "scope": "May read the registered article for private study with attribution; no distribution.",
+          "unit_id": "paid-close-333ce07c:U0"
+        },
+        "U1": {
+          "active": false,
+          "consumed": false,
+          "expiry": 1791942995,
+          "owner": "0xc495ef51618d03267a1f227afe5b27b38c748272",
+          "root_id": "paid-close-333ce07c",
+          "scope": "May print the registered article for private study with attribution; no distribution.",
+          "unit_id": "paid-close-333ce07c:U1"
+        }
+      },
+      "nativeBalanceGen": "0",
+      "complete": true,
+      "verifiedAt": "2026-10-14T01:58:14.069Z"
+    }
+  },
+  "funding": {
+    "sender": "0xC495ef51618D03267A1f227aFe5b27B38c748272",
+    "recipient": "0x45248be151F7f7e230150db23774733Cd966Eb45",
+    "valueGen": "2",
+    "beforeRecipientGen": "1",
+    "status": "FINALIZED",
+    "nonce": 1146,
+    "transactionHash": "0x8e47d50adbd8f42b3a346a516141e6b4d7c01a9d0bc019b796c7c609bfe51112",
+    "signedTransactionHash": "0x8e47d50adbd8f42b3a346a516141e6b4d7c01a9d0bc019b796c7c609bfe51112",
+    "receipt": {
+      "transactionHash": "0x8e47d50adbd8f42b3a346a516141e6b4d7c01a9d0bc019b796c7c609bfe51112",
+      "status": "FINALIZED",
+      "sender": "0xC495ef51618D03267A1f227aFe5b27B38c748272",
+      "recipient": "0x45248be151F7f7e230150db23774733Cd966Eb45",
+      "valueGen": "2",
+      "executionResult": null,
+      "parentHash": null,
+      "explicitError": false
+    },
+    "afterRecipientGen": "3",
+    "verified": true,
+    "explorerUrl": "https://explorer-studio.genlayer.com/tx/0x8e47d50adbd8f42b3a346a516141e6b4d7c01a9d0bc019b796c7c609bfe51112"
+  },
+  "lastVerifiedAt": "2026-10-14T01:58:14.070Z",
+  "complete": true
+}

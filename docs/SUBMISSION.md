@@ -1,58 +1,43 @@
 # Copy-ready Portal submission
 
-**SUPERSEDED V1 PACKET. Do not submit for V2.** Owner-requested escrow revision
-requires new deployment, real money lifecycle, updated counts/CI/description.
+**Title:** PartitionSeal - Conserved Permission Partition with GEN Escrow
 
-**Title:** PartitionSeal - Conserved Semantic Permission Partition
+**Category:** Builder / Intelligent Contracts
 
-**Track / Category:** Builder / Intelligent Contracts
-
-**Description (912 characters):**
+**Description (942 characters):**
 
 ```text
-PartitionSeal conserves two exclusive protocol permission units when their holder splits scope between two named recipients. Both recipients assent an immutable, transaction-authenticated proposal. GenLayer validators independently refetch fixed W3C policy context and agree on the meaning of complete unit coverage and non-widening, not JSON formatting or rationale wording. Only a valid disjoint partition retires original authority and reassigns the same two one-time units; expiry restores unused original rights. Reusable via canonical views and holder-signed consumption for LangGraph permission brokers, DAO department routers and A2A gateways. One contract, 55 direct tests and 7 receipt tests, docs, finalized partition/consumption and recovery evidence. Deployed on Studionet at 0xF7fa8F9b9Cb0c9195675570e11fDD9dc321Bf8c5. Internal protocol rights only; no external ownership, execution or GEN custody.
+PartitionSeal conserves two exclusive internal permission units when their holder partitions scope between two named recipients. Each recipient escrows 1 GEN and assents exact immutable terms. GenLayer validators independently refetch W3C context and agree on the meaning of complete coverage and non-widening, not JSON formatting. A valid disjoint partition assigns the same units once and credits 2 GEN to the holder; rejection or expiry refunds actual payers. Paid buyers can recover after deadlines without the holder and withdraw only to their own wallet. Reusable through canonical views and signed consumption for LangGraph brokers, DAO department routers and A2A gateways. Ships docs, 104 direct tests, 17 receipt tests and five real paid lifecycles with finalized child transfers and exact balance proof. Studionet: 0xF6027BFEd18Fc5e50c1E6f56f015bbB5826F7EAD. Internal rights only; no external ownership, execution or adoption claim.
 ```
 
 **Evidence URL:** https://github.com/duclucky/partition-seal
 
-**Contract Address:** 0xF7fa8F9b9Cb0c9195675570e11fDD9dc321Bf8c5
+**Contract Address:** 0xF6027BFEd18Fc5e50c1E6f56f015bbB5826F7EAD
 
-**Explorer Contract URL:** https://explorer-studio.genlayer.com/address/0xF7fa8F9b9Cb0c9195675570e11fDD9dc321Bf8c5
+**Explorer Contract URL:** https://explorer-studio.genlayer.com/address/0xF6027BFEd18Fc5e50c1E6f56f015bbB5826F7EAD
 
-**Explorer Deploy Tx URL:** https://explorer-studio.genlayer.com/tx/0x68fe0bb658db8b0a9c76ab50496e9ea35095cc71355aa258f0d88a7b465abbac
+**Explorer Deploy Tx URL:** https://explorer-studio.genlayer.com/tx/0xf66bcc8f3a7d0ae1fdf894bc620df148700bcab28751082830ac393e8ddd5e50
 
-**Network:** Studionet, chain ID 61999, explicitly selected by the owner for this run.
-No Studio Dev result is claimed.
+**Network:** owner-selected Studionet61999. No Studio Dev execution claimed.
 
-**Successful CI:** https://github.com/duclucky/partition-seal/actions/runs/38449244452
+**CI:** PENDING_CURRENT_PUBLIC_CI
 
-**Exact counts:** 1 application contract; 55 direct cases; 7 Node receipt cases;
-12 methods (7 writes, 5 views); no frontend. The separate feasibility diagnostic
-is excluded from these counts.
+**Unchanged grader:**0BLOCKER,1 reviewed warning (private nonpayable rejection
+guard, not a receiving entrypoint); npm check/gltest PASS, GATE OK. Bot unchanged.
 
-**Real lifecycle summary:** Two origin-authenticated units, private reading and
-printing with attribution/no distribution, were partitioned into two paraphrased
-child scopes. Both named wallets assented exact bytes. Finalized semantic review
-assigned U0 exclusively to A and U1 exclusively to B with both limits WITHIN;
-root SPLIT, proposal PARTITIONED. Both recipients consumed their same conserved
-unit IDs once. Another finalized case expired an unassented proposal, restored
-unused original authority, then closed the expired root. All writes had 0 GEN
-application value; no custody or transfer was needed.
+**Counts:** one application contract,104 direct +17 Node receipt cases,16methods.
 
-**Lifecycle evidence:**
+**Real lifecycle:** paid1GEN each, finalized meaningful PARTITIONED, seller2GEN
+credited/withdrawn, both conserved units consumed. Real rejection refunds1GEN each;
+partial/full paid expiry and pending-root close refund actual payers, with the paid
+buyer independently signing recovery. Seven finalized children prove8GEN exits,
+native balance/liability0GEN. Negative/auth/source/retry/clock branches are local
+proof; no external execution/title/adoption claim. One validator ERROR cause unknown.
 
-- https://github.com/duclucky/partition-seal/blob/main/docs/evidence/studionet/deployment.json
-- https://github.com/duclucky/partition-seal/blob/main/docs/evidence/studionet/lifecycle.json
-- https://github.com/duclucky/partition-seal/blob/main/docs/evidence/studionet/recovery.json
-- https://github.com/duclucky/partition-seal/blob/main/docs/evidence/studionet/consensus.json
+**Lifecycle evidence:** https://github.com/duclucky/partition-seal/blob/main/docs/evidence/studionet/payments.json
 
-**Honest limits:** Two units, two recipients, one level, at most three attempts;
-internal protocol permissions only. Three validators agreed; one validator
-returned ERROR with unknown cause; the review finalized MAJORITY_AGREE/SUCCESS.
-No external gateway execution, property/copyright title, legal determination or
-adoption is established. Negative branches are direct-test evidence, not claimed
-live transactions.
+**Independent proof:** https://github.com/duclucky/partition-seal/blob/main/docs/evidence/studionet/verification.json
 
-The Portal Evidence field takes the GitHub repository URL. The owner submits at
-https://portal.genlayer.foundation under Builder -> Intelligent Contracts after
-completing reCAPTCHA. No Portal submission confirmation is claimed here.
+Evidence takes the GitHub repository URL. Owner submits at
+https://portal.genlayer.foundation, Builder -> Intelligent Contracts, after reCAPTCHA.
+No Portal submission confirmation is claimed.

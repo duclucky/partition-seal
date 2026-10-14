@@ -40,10 +40,15 @@ export function actors(){
  return accounts;
 }
 export const client=account=>createClient({chain:studionet,endpoint:ENDPOINT,...(account?{account}:{})});
+let sdkLogDepth=0,savedError,savedWarn;
 export async function safeSdk(operation){
- const error=console.error,warn=console.warn;
- console.error=console.warn=()=>console.log(JSON.stringify({sdkDiagnostic:'REDACTED'}));
- try{return await operation();}finally{console.error=error;console.warn=warn;}
+ if(sdkLogDepth++===0){
+  savedError=console.error;savedWarn=console.warn;
+  console.error=console.warn=()=>console.log(JSON.stringify({sdkDiagnostic:'REDACTED'}));
+ }
+ try{return await operation();}finally{
+  if(--sdkLogDepth===0){console.error=savedError;console.warn=savedWarn;}
+ }
 }
 export async function chainCheck(reader){
  if(studionet.id!==61999||Number(BigInt(await reader.request({method:'eth_chainId',params:[]})))!==61999)throw new Error('Wrong network identity');

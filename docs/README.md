@@ -1,12 +1,12 @@
 # PartitionSeal V3 escrow specification
 
-Active price1GEN per named recipient; complete settlement/refund/withdraw safety policy in [PAYMENT-PLAN.md](PAYMENT-PLAN.md). V3 real paid execution is PENDING until all recorded cases finish. V1 evidence is historical in evidence/studionet/archive/partition-seal-v1.json.
+Active price1GEN per named recipient; complete settlement/refund/withdraw safety policy in [PAYMENT-PLAN.md](PAYMENT-PLAN.md). V3 real paid execution PASS_EXECUTION: five cases,32 parent writes,7 value children,8GEN received/withdrawn and0GEN liability/native balance; evidence/studionet/verification.json. V1 evidence is historical in evidence/studionet/archive/partition-seal-v1.json.
 
 ## Identity and product hook
 
-IDEA-042, partition-seal, Intelligent Contracts, V3 PAYMENTS IN EXECUTION. Owner requested **Studionet
+IDEA-042, partition-seal, Intelligent Contracts, V3 VERIFIED PAID EXECUTION. Owner requested **Studionet
 61999** for this deliverable. New independent contract-only repo.
-V3 exact source/schema deployed successfully; current payment/CI proof remains pending.
+V3 exact source/schema and all five paid cases verified. Current public CI/grader are being checked.
 
 Subdivide two exclusive protocol permission units without duplicating scope,
 dropping duties or allowing the original holder to exercise retired authority.
@@ -41,7 +41,7 @@ overlapping or expanded scopes. Hashes authenticate bytes, not semantic coverage
 | Contract count | PASS_ADMISSION | One actual authority state owner, no mirroring guard |
 | Differentiation | PASS_ADMISSION | Exhaustive/disjoint subdivision and root retirement differs from attenuation/cancellation/merge |
 | Claim-to-code | PASS_ADMISSION | Complete mapping below with primary/recovery canonical network evidence |
-| Full lifecycle | PASS_ADMISSION; PENDING_EXECUTION_V3 | Paid sale/refund/close/withdraw requires exact native/recipient deltas and finalized child proofs |
+| Full lifecycle | PASS_ADMISSION; PASS_EXECUTION | Paid sale/refund/close/withdraw requires exact native/recipient deltas and finalized child proofs |
 | Scope honesty | PASS_ADMISSION | No external property, legal title, copyright, execution, external delivery or adoption claim |
 
 ## Actors / scope and non-goals
@@ -233,7 +233,7 @@ docs/evidence/studionet; generic diagnostic not counted as product contract.
 Public allowlist/hygiene, meaningful Git history, repo/CI/Explorer verification,
 unchanged grading bot NO BLOCKER, complete copy-ready <1000-char Portal fields and final
 master reread. Owner submits. Paid partition/refund/expiry/close/withdraw proof
-is PENDING until every payments.json case completes. Invalid auth/output, source
+is complete in payments.json and independently re-read in verification.json. Invalid auth/output, source
 outage and other negative boundary branches are local-test evidence only.
 No production gateway execution claimed.
 

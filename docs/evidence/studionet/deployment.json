@@ -1,0 +1,62 @@
+{
+  "network": "studionet",
+  "chainId": 61999,
+  "sourceCommit": "88663f2ef7674444aeb6ab9dde06fab84b30c65a",
+  "sourceSHA256": "333ce07cb91bbf8e8d90fcd6b71689762678ad51f3e5bae88f89140c1aa096a3",
+  "contractRevision": "PARTITION_SEAL_V3_ESCROW",
+  "contractApiVersion": "v0.2.16",
+  "dependsRunner": "py-genlayer:1jb45aa8ynh2a9c9xn3b7qqh8sm5q93hwfp7jqmwsfhh8jpz09h6",
+  "status": "FINALIZED",
+  "valueGen": "0",
+  "preparedAt": "2026-10-14T01:23:12.780Z",
+  "preSubmitNonce": "0x479",
+  "signedTransactionHash": "0xf66bcc8f3a7d0ae1fdf894bc620df148700bcab28751082830ac393e8ddd5e50",
+  "transactionHash": "0xf66bcc8f3a7d0ae1fdf894bc620df148700bcab28751082830ac393e8ddd5e50",
+  "submittedAt": "2026-10-14T01:23:40.755Z",
+  "executionResult": "SUCCESS",
+  "consensusResult": "MAJORITY_AGREE",
+  "contractAddress": "0xF6027BFEd18Fc5e50c1E6f56f015bbB5826F7EAD",
+  "validatorCount": 4,
+  "explorerAddressUrl": "https://explorer-studio.genlayer.com/address/0xF6027BFEd18Fc5e50c1E6f56f015bbB5826F7EAD",
+  "explorerDeployTxUrl": "https://explorer-studio.genlayer.com/tx/0xf66bcc8f3a7d0ae1fdf894bc620df148700bcab28751082830ac393e8ddd5e50",
+  "schema": {
+    "constructor": true,
+    "methods": [
+      "assent",
+      "close_root",
+      "consume",
+      "create_root",
+      "expire_proposal",
+      "get_accounting",
+      "get_attempt",
+      "get_authority",
+      "get_credit",
+      "get_payment",
+      "get_policy",
+      "get_proposal",
+      "get_root",
+      "propose_partition",
+      "review_partition",
+      "withdraw"
+    ],
+    "count": 16
+  },
+  "canonicalPolicy": {
+    "chain_id": 61999,
+    "children": [
+      "A",
+      "B"
+    ],
+    "max_attempts": 3,
+    "native_value_custody": true,
+    "network": "studionet",
+    "price_per_recipient_gen": "1",
+    "revision": "PARTITION_SEAL_V3_ESCROW",
+    "source": "https://www.w3.org/TR/2018/REC-odrl-model-20180215/",
+    "units": [
+      "U0",
+      "U1"
+    ]
+  },
+  "verifiedAt": "2026-10-14T01:25:40.102Z"
+}
